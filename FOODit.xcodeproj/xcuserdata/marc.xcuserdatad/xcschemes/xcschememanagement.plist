@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MHSGenerateSeedDatabase.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>4975EB561A2BA5DB00F54354</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>49C832D21A3362AF00A73B0F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>49C832ED1A3362B000A73B0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

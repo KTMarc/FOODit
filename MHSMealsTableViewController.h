@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  TableViewController.h
 //  FOODit
 //
 //  Created by Marc Humet on 30/11/14.
@@ -7,17 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+#import "MHSCoreDataTableViewController.h"
 #import "MHSSimpleCoreDataStack.h"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface MHSMealsTableViewController : MHSCoreDataTableViewController
 
-@property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MHSSimpleCoreDataStack *model;
 
-
-
-
 @end
-
