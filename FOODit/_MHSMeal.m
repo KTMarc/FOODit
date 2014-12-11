@@ -14,6 +14,7 @@ const struct MHSMealAttributes MHSMealAttributes = {
 
 const struct MHSMealRelationships MHSMealRelationships = {
 	.mealOrders = @"mealOrders",
+	.photo = @"photo",
 	.tags = @"tags",
 };
 
@@ -92,6 +93,8 @@ const struct MHSMealRelationships MHSMealRelationships = {
 	[self didAccessValueForKey:@"mealOrders"];
 	return result;
 }
+
+@dynamic photo;
 
 @dynamic tags;
 

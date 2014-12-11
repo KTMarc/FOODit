@@ -14,10 +14,12 @@ extern const struct MHSMealAttributes {
 
 extern const struct MHSMealRelationships {
 	__unsafe_unretained NSString *mealOrders;
+	__unsafe_unretained NSString *photo;
 	__unsafe_unretained NSString *tags;
 } MHSMealRelationships;
 
 @class MHSMealOrder;
+@class NSManagedObject;
 @class MHSTag;
 
 @interface MHSMealID : NSManagedObjectID {}
@@ -60,6 +62,10 @@ extern const struct MHSMealRelationships {
 @property (nonatomic, strong) NSSet *mealOrders;
 
 - (NSMutableSet*)mealOrdersSet;
+
+@property (nonatomic, strong) NSManagedObject *photo;
+
+//- (BOOL)validatePhoto:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *tags;
 
@@ -108,6 +114,9 @@ extern const struct MHSMealRelationships {
 
 - (NSMutableSet*)primitiveMealOrders;
 - (void)setPrimitiveMealOrders:(NSMutableSet*)value;
+
+- (NSManagedObject*)primitivePhoto;
+- (void)setPrimitivePhoto:(NSManagedObject*)value;
 
 - (NSMutableSet*)primitiveTags;
 - (void)setPrimitiveTags:(NSMutableSet*)value;

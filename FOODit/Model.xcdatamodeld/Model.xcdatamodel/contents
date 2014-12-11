@@ -8,6 +8,7 @@
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="primaryImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="mealOrders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealOrder" inverseName="meal" inverseEntity="MealOrder" syncable="YES"/>
+        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="meal" inverseEntity="Photo" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="meals" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="MealOrder" representedClassName="MHSMealOrder" syncable="YES">
@@ -19,15 +20,20 @@
     <entity name="Order" representedClassName="MHSOrder" syncable="YES">
         <relationship name="mealOrders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealOrder" inverseName="order" inverseEntity="MealOrder" syncable="YES"/>
     </entity>
+    <entity name="Photo" syncable="YES">
+        <attribute name="imageData" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="photo" inverseEntity="Meal" syncable="YES"/>
+    </entity>
     <entity name="Tag" representedClassName="MHSTag" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="meals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="tags" inverseEntity="Meal" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Meal" positionX="-1028" positionY="-451" width="128" height="163"/>
-        <element name="Tag" positionX="-828" positionY="-306" width="128" height="88"/>
-        <element name="Order" positionX="-639" positionY="-396" width="128" height="58"/>
+        <element name="Meal" positionX="-1028" positionY="-451" width="128" height="178"/>
         <element name="MealOrder" positionX="-830" positionY="-441" width="128" height="103"/>
+        <element name="Order" positionX="-639" positionY="-396" width="128" height="58"/>
+        <element name="Tag" positionX="-828" positionY="-306" width="128" height="88"/>
+        <element name="Photo" positionX="-830" positionY="-538" width="128" height="73"/>
     </elements>
 </model>

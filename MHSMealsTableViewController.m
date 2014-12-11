@@ -23,7 +23,11 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-
+    /* CORE DATA FILE
+    NSString * NSTemporaryDirectory ( void );
+    NSLog(@"FILE PATH :%@", NSTemporaryDirectory());
+     */
+    
     self.title = @"Meals";
    
     //We access the model we created in the app delegate

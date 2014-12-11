@@ -52,6 +52,8 @@
                                                        URL:self.dbURL
                                                    options:nil
                                                      error:&err]) {
+
+         
             // Something went really wrong...
             // Send a notification and return nil
             NSNotification *note = [NSNotification

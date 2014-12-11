@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		494F0ECC1A3A20D1007D8960 /* unnamed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494F0ECB1A3A20D1007D8960 /* unnamed.jpg */; };
 		4975EB411A2BA5DA00F54354 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB401A2BA5DA00F54354 /* main.m */; };
 		4975EB441A2BA5DA00F54354 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB431A2BA5DA00F54354 /* AppDelegate.m */; };
 		4975EB4D1A2BA5DB00F54354 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4975EB4B1A2BA5DB00F54354 /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		494F0ECB1A3A20D1007D8960 /* unnamed.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed.jpg; sourceTree = SOURCE_ROOT; };
 		4975EB3B1A2BA5DA00F54354 /* FOODit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOODit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4975EB3F1A2BA5DA00F54354 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4975EB401A2BA5DA00F54354 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -162,10 +164,12 @@
 		4975EB3D1A2BA5DA00F54354 /* FOODit */ = {
 			isa = PBXGroup;
 			children = (
-				49E9FD0C1A3762FC00F9BF50 /* Setup Everything */,
+				4975EB421A2BA5DA00F54354 /* AppDelegate.h */,
+				4975EB431A2BA5DA00F54354 /* AppDelegate.m */,
+				49C8325A1A333E0200A73B0F /* Core Data */,
+				49E9FD0C1A3762FC00F9BF50 /* Controllers */,
 				49C832CD1A33619100A73B0F /* Frameworks */,
 				49C832841A33590B00A73B0F /* Resources */,
-				49C8325A1A333E0200A73B0F /* Core Data */,
 				4975EB4B1A2BA5DB00F54354 /* Main.storyboard */,
 				4975EB4E1A2BA5DB00F54354 /* Images.xcassets */,
 				49E9FD161A37AB8200F9BF50 /* Model.xcdatamodeld */,
@@ -205,6 +209,8 @@
 		49C8325A1A333E0200A73B0F /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				49E9FD051A375BFE00F9BF50 /* MHSSimpleCoreDataStack.h */,
+				49E9FD061A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m */,
 				49C832B61A335B5B00A73B0F /* MHSMeal.h */,
 				49C832B71A335B5B00A73B0F /* MHSMeal.m */,
 				49C832B81A335B5B00A73B0F /* MHSMealOrder.h */,
@@ -246,6 +252,7 @@
 		49C832871A33596D00A73B0F /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				494F0ECB1A3A20D1007D8960 /* unnamed.jpg */,
 				49C832881A33596D00A73B0F /* expand-button.svg */,
 				49C832891A33596D00A73B0F /* meal-card__curve.svg */,
 				49C8328A1A33596D00A73B0F /* tag--charcoal.svg */,
@@ -279,19 +286,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		49E9FD0C1A3762FC00F9BF50 /* Setup Everything */ = {
+		49E9FD0C1A3762FC00F9BF50 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				49E9FD051A375BFE00F9BF50 /* MHSSimpleCoreDataStack.h */,
-				49E9FD061A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m */,
-				4975EB421A2BA5DA00F54354 /* AppDelegate.h */,
-				4975EB431A2BA5DA00F54354 /* AppDelegate.m */,
 				49E9FD091A37628100F9BF50 /* MHSCoreDataTableViewController.h */,
 				49E9FD0A1A37628100F9BF50 /* MHSCoreDataTableViewController.m */,
 				4975EB671A2BA60E00F54354 /* MHSMealsTableViewController.h */,
 				4975EB681A2BA60E00F54354 /* MHSMealsTableViewController.m */,
 			);
-			name = "Setup Everything";
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,6 +390,7 @@
 				49C8329B1A33596D00A73B0F /* tag--charcoal.svg in Resources */,
 				49C832A21A33596D00A73B0F /* tag--peanut.svg in Resources */,
 				49C832A51A33596D00A73B0F /* tag--snack.svg in Resources */,
+				494F0ECC1A3A20D1007D8960 /* unnamed.jpg in Resources */,
 				49C832A61A33596D00A73B0F /* tag--spicy.svg in Resources */,
 				49C832A31A33596D00A73B0F /* tag--pork.svg in Resources */,
 				49C832A01A33596D00A73B0F /* tag--lamb.svg in Resources */,

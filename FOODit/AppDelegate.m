@@ -30,56 +30,78 @@
    // self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     
-    //Create a Meal
-    [MHSMeal mealWithName:@"Seafood risotto"
+    //Create a Meal or two
+    MHSMeal *mealOne = [MHSMeal mealWithName:@"Seafood risotto"
                                     desc:@"This seafood risotto recipe is infused with a number of fresh herbs, imparting remarkable flavour onto the risotto rice base. With scallops, prawns and mussels to make up the risotto but you can use whatever seafood is available and you like. Served with some cheddar rolls or a small avocado salad for a delicious seafood supper."
                                   mealID:@"cad2d2e8b16eb668f47b4f2827438951"
                                  context:self.model.context];
     
-    [MHSMeal mealWithName:@"Penne bacon, green peas"
+    MHSMeal *mealTwo = [MHSMeal mealWithName:@"Penne bacon, green peas"
                                      desc:@"Caramelized onions lend a slight sweetness to this hearty pasta dish, with Onion, Bacon, and Parmesan"
                                    mealID:@"6308e806b1233e111081666e82f7aac1"
                                   context:self.model.context];
     
-    //Create tags for that meal
-    [MHSTag tagWithName:@"Main Courses"
-                                 type:@"course"
-                              context:self.model.context];
+    //Create tags
+    MHSTag *mainCoursesTag =  [MHSTag tagWithName:@"Main Courses"
+                                          type:@"course"
+                                       context:self.model.context];
     
     
-    [MHSTag tagWithName:@"Diet"
-                                  type:@"pescetarian"
-                               context:self.model.context];
+    MHSTag *pescetarianTag =   [MHSTag tagWithName:@"Pescetarian"
+                                           type:@"Diet"
+                                        context:self.model.context];
     
+    MHSTag *seafodTag =   [MHSTag tagWithName:@"seafood"
+                                           type:@"noType"
+                                        context:self.model.context];
+
+    MHSTag *pastaTag =   [MHSTag tagWithName:@"pasta"
+                                         type:@"noType"
+                                      context:self.model.context];
+    
+    //Make relationships between meals and tags
+    [mealOne addTagsObject:mainCoursesTag];
+    [mealOne addTagsObject:pescetarianTag];
+    [mealOne addTagsObject:seafodTag];
     
 
-/*
+    [mealTwo addTagsObject:mainCoursesTag];
+    [mealTwo addTagsObject:pastaTag];
     
+    
+    //List of meals
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-    //req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:AGTNamedEntityAttributes.modificationDate
-    //                                                      ascending:NO],
-    //                        [NSSortDescriptor sortDescriptorWithKey:AGTNamedEntityAttributes.name
-    //                                                      ascending:YES]];
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
+                                                          ascending:NO]];
     
-    NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
-                                                                              managedObjectContext:self.model.context
-                                                                                sectionNameKeyPath:nil
-                                                                                         cacheName:nil];
+    //List of tags
+    req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
+                                                          ascending:NO]];
     
-    MHSMealsTableViewController *mealVC = [[MHSMealsTableViewController alloc]
-                                        initWithFetchedResultsController:results
-                                        style:UITableViewStylePlain];
+    //List of tags for a specific Meal mealID = @"cad2d2e8b16eb668f47b4f2827438951"
+    req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
+
+                             [MHSMealRelationships ]
+                                                          ascending:NO]];
+
+    req.predicate = [NSPredicate predicateWithFormat:@"ANY meal = %@",[......];
+                     
     
+    
+    
+    NSError *error = nil;
+    NSArray *results = [self.model.context executeFetchRequest:req
+                                                         error:&error];
+    
+    if (results == nil) {
+        NSLog(@"Error fetching: %@", results);
+    }else{
+        NSLog(@"Results: %@", results);
+    }
     
 
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:mealVC];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
- 
-*/
-
-    
     
     return YES;
 
@@ -97,7 +119,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    //[self save];
+    [self save];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -113,6 +135,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self save];
     
     NSLog(@"Bye...");
 }
@@ -147,8 +170,7 @@
     
     // Guardamos
     [self save];
-    
-    
+
 }
 
 
