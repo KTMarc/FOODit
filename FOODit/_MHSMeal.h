@@ -19,7 +19,7 @@ extern const struct MHSMealRelationships {
 } MHSMealRelationships;
 
 @class MHSMealOrder;
-@class NSManagedObject;
+@class MHSPhoto;
 @class MHSTag;
 
 @interface MHSMealID : NSManagedObjectID {}
@@ -63,7 +63,7 @@ extern const struct MHSMealRelationships {
 
 - (NSMutableSet*)mealOrdersSet;
 
-@property (nonatomic, strong) NSManagedObject *photo;
+@property (nonatomic, strong) MHSPhoto *photo;
 
 //- (BOOL)validatePhoto:(id*)value_ error:(NSError**)error_;
 
@@ -115,8 +115,8 @@ extern const struct MHSMealRelationships {
 - (NSMutableSet*)primitiveMealOrders;
 - (void)setPrimitiveMealOrders:(NSMutableSet*)value;
 
-- (NSManagedObject*)primitivePhoto;
-- (void)setPrimitivePhoto:(NSManagedObject*)value;
+- (MHSPhoto*)primitivePhoto;
+- (void)setPrimitivePhoto:(MHSPhoto*)value;
 
 - (NSMutableSet*)primitiveTags;
 - (void)setPrimitiveTags:(NSMutableSet*)value;

@@ -70,6 +70,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
 #pragma mark - Data Source
+- (CGFloat)tableView:(UITableView *)tableView
+estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 350;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 350;
+}
+
 -(void) tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -83,7 +93,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     // Averiguar el notebook
-    MHSMeal *nb = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    MHSMeal *nm = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     
     // Crear una celda
@@ -94,9 +104,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                       reuseIdentifier:cellId];
     }
     
-    // Sincronizar libreta -> celda
-    cell.textLabel.text = nb.name;
-    cell.detailTextLabel.text = nb.desc;
+    UILabel *nameLabel = (UILabel*) [cell viewWithTag:10];
+    nameLabel.text = nm.name;
+    
+    UILabel *descLabel = (UILabel*) [cell viewWithTag:11];
+    descLabel.text = nm.desc;
   
     // Devolver la celda
     return cell;

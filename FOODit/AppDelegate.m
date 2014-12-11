@@ -69,17 +69,22 @@
     [mealTwo addTagsObject:pastaTag];
     
     
+    /*
     //List of meals
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
                                                           ascending:NO]];
     
     //List of tags
+  
     req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
                                                           ascending:NO]];
+   
     
     //List of tags for a specific Meal mealID = @"cad2d2e8b16eb668f47b4f2827438951"
+
+    
     req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
 
@@ -87,22 +92,29 @@
                                                           ascending:NO]];
 
     req.predicate = [NSPredicate predicateWithFormat:@"ANY meal = %@",[......];
-                     
-    
-    
+      */               
+  
+
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
+    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
+                                                          ascending:NO]];
+    */
     
     NSError *error = nil;
     NSArray *results = [self.model.context executeFetchRequest:req
                                                          error:&error];
     
+    
     if (results == nil) {
         NSLog(@"Error fetching: %@", results);
     }else{
-        NSLog(@"Results: %@", results);
+    //    NSLog(@"Results: %@", results);
+        
+        for (MHSMeal* meal in results) {
+          //  NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.type"], [meal valueForKeyPath:@"tags.name"]);
+        }
+        
     }
-    
-
-    
     return YES;
 
 }
@@ -142,37 +154,6 @@
 
 
 #pragma mark - Utils
-
--(void) trastearConDatos{
-    
-    
-
-    /*
-    // Buscar
-    NSFetchRequest *req = [[NSFetchRequest alloc] initWithEntityName:[AGTNote entityName]];
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:AGTNamedEntityAttributes.name
-                                                          ascending:YES],
-                            [NSSortDescriptor sortDescriptorWithKey:AGTNamedEntityAttributes.modificationDate
-                                                          ascending:NO]];
-    NSError *error = nil;
-    NSArray *results = [self.model.context executeFetchRequest:req
-                                                         error:&error];
-    
-    if (results == nil) {
-        NSLog(@"Error al buscar: %@", results);
-    }else{
-        NSLog(@"Results %@", results);
-    }
-    */
-    // Eliminamos
-   // [self.model.context deleteObject:pampita];
-    
-    
-    // Guardamos
-    [self save];
-
-}
-
 
 
 -(void)save{

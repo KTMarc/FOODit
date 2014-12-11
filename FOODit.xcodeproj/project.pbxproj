@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49307A1F1A3A3F12005B0937 /* _MHSPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 49307A1C1A3A3F12005B0937 /* _MHSPhoto.m */; };
+		49307A201A3A3F12005B0937 /* MHSPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 49307A1E1A3A3F12005B0937 /* MHSPhoto.m */; };
 		494F0ECC1A3A20D1007D8960 /* unnamed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494F0ECB1A3A20D1007D8960 /* unnamed.jpg */; };
 		4975EB411A2BA5DA00F54354 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB401A2BA5DA00F54354 /* main.m */; };
 		4975EB441A2BA5DA00F54354 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB431A2BA5DA00F54354 /* AppDelegate.m */; };
@@ -60,6 +62,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49307A1B1A3A3F12005B0937 /* _MHSPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MHSPhoto.h; sourceTree = "<group>"; };
+		49307A1C1A3A3F12005B0937 /* _MHSPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MHSPhoto.m; sourceTree = "<group>"; };
+		49307A1D1A3A3F12005B0937 /* MHSPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSPhoto.h; sourceTree = "<group>"; };
+		49307A1E1A3A3F12005B0937 /* MHSPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSPhoto.m; sourceTree = "<group>"; };
 		494F0ECB1A3A20D1007D8960 /* unnamed.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed.jpg; sourceTree = SOURCE_ROOT; };
 		4975EB3B1A2BA5DA00F54354 /* FOODit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOODit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4975EB3F1A2BA5DA00F54354 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -219,6 +225,8 @@
 				49C832BB1A335B5B00A73B0F /* MHSOrder.m */,
 				49C832BC1A335B5B00A73B0F /* MHSTag.h */,
 				49C832BD1A335B5B00A73B0F /* MHSTag.m */,
+				49307A1D1A3A3F12005B0937 /* MHSPhoto.h */,
+				49307A1E1A3A3F12005B0937 /* MHSPhoto.m */,
 				49C832671A333E3400A73B0F /* Machine */,
 			);
 			name = "Core Data";
@@ -235,6 +243,8 @@
 				49C832AF1A335B5200A73B0F /* _MHSOrder.m */,
 				49C832B01A335B5200A73B0F /* _MHSTag.h */,
 				49C832B11A335B5200A73B0F /* _MHSTag.m */,
+				49307A1B1A3A3F12005B0937 /* _MHSPhoto.h */,
+				49307A1C1A3A3F12005B0937 /* _MHSPhoto.m */,
 			);
 			name = Machine;
 			sourceTree = "<group>";
@@ -421,6 +431,8 @@
 				49C832B51A335B5200A73B0F /* _MHSTag.m in Sources */,
 				49E9FD071A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m in Sources */,
 				49C832BE1A335B5B00A73B0F /* MHSMeal.m in Sources */,
+				49307A201A3A3F12005B0937 /* MHSPhoto.m in Sources */,
+				49307A1F1A3A3F12005B0937 /* _MHSPhoto.m in Sources */,
 				49C832BF1A335B5B00A73B0F /* MHSMealOrder.m in Sources */,
 				49E9FD0B1A37628100F9BF50 /* MHSCoreDataTableViewController.m in Sources */,
 				49C832C11A335B5B00A73B0F /* MHSTag.m in Sources */,
