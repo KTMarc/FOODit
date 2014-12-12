@@ -5,7 +5,7 @@
 
 extern const struct MHSTagAttributes {
 	__unsafe_unretained NSString *name;
-	__unsafe_unretained NSString *type;
+	__unsafe_unretained NSString *tagType;
 } MHSTagAttributes;
 
 extern const struct MHSTagRelationships {
@@ -27,9 +27,9 @@ extern const struct MHSTagRelationships {
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* type;
+@property (nonatomic, strong) NSString* tagType;
 
-//- (BOOL)validateType:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateTagType:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *meals;
 
@@ -49,6 +49,9 @@ extern const struct MHSTagRelationships {
 
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+- (NSString*)primitiveTagType;
+- (void)setPrimitiveTagType:(NSString*)value;
 
 - (NSMutableSet*)primitiveMeals;
 - (void)setPrimitiveMeals:(NSMutableSet*)value;

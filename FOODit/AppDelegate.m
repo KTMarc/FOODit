@@ -13,7 +13,8 @@
 #import "MHSTag.h"
 #import "MHSSimpleCoreDataStack.h"
 #import "MHSMealsTableViewController.h"
-
+#import "MHSPhoto.h"
+#import "MHSOrder.h"
 
 @implementation AppDelegate
 
@@ -21,43 +22,57 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-    // Crear una instancia del stack de Core Data
+    // Create the Core Data stack
     self.model = [MHSSimpleCoreDataStack coreDataStackWithModelName:@"Model"];
     
     
     [self autoSave];
     
-   // self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
-    
+   
     //Create a Meal or two
     MHSMeal *mealOne = [MHSMeal mealWithName:@"Seafood risotto"
                                     desc:@"This seafood risotto recipe is infused with a number of fresh herbs, imparting remarkable flavour onto the risotto rice base. With scallops, prawns and mussels to make up the risotto but you can use whatever seafood is available and you like. Served with some cheddar rolls or a small avocado salad for a delicious seafood supper."
-                                  mealID:@"cad2d2e8b16eb668f47b4f2827438951"
+                                    price:@9.5
+                                    mealID:@"cad2d2e8b16eb668f47b4f2827438951"
+                             primaryImageURL:@"http://lh5.ggpht.com/ASTYH5ZbfNpA5MOxUya9MfOXw8910PpbcvkAWeMFbjurfYvbqx1qnfLU091k3UyxGXUYDn_dNOMRsmCIE2ozwRAd"
                                  context:self.model.context];
+    
+    UIImage *image1 =  [UIImage imageNamed:@"unnamed.jpg"];
+    MHSPhoto *photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
+    
+    [mealOne setPhoto:photo];
+    
     
     MHSMeal *mealTwo = [MHSMeal mealWithName:@"Penne bacon, green peas"
                                      desc:@"Caramelized onions lend a slight sweetness to this hearty pasta dish, with Onion, Bacon, and Parmesan"
+                                    price:@8.5
                                    mealID:@"6308e806b1233e111081666e82f7aac1"
+                              primaryImageURL:@"http://lh4.ggpht.com/xVItGb4gEo_f-q8G0jDTNbguDdS2NzaSz2fqti_a6f3egda7DLbTI0eGqdCgXakqT3TsezDlKDFtdNYWdGJvtw"
                                   context:self.model.context];
     
+    image1 =  [UIImage imageNamed:@"unnamed2.jpg"];
+    photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
+    
+    [mealTwo setPhoto:photo];
+    
+        
     //Create tags
     MHSTag *mainCoursesTag =  [MHSTag tagWithName:@"Main Courses"
-                                          type:@"course"
-                                       context:self.model.context];
+                                          tagType:@"course"
+                                          context:self.model.context];
     
     
     MHSTag *pescetarianTag =   [MHSTag tagWithName:@"Pescetarian"
-                                           type:@"Diet"
-                                        context:self.model.context];
+                                           tagType:@"Diet"
+                                           context:self.model.context];
     
     MHSTag *seafodTag =   [MHSTag tagWithName:@"seafood"
-                                           type:@"noType"
-                                        context:self.model.context];
-
-    MHSTag *pastaTag =   [MHSTag tagWithName:@"pasta"
-                                         type:@"noType"
+                                      tagType:@"noType"
                                       context:self.model.context];
+    
+    MHSTag *pastaTag =   [MHSTag tagWithName:@"pasta"
+                                     tagType:@"noType"
+                                     context:self.model.context];
     
     //Make relationships between meals and tags
     [mealOne addTagsObject:mainCoursesTag];
@@ -67,6 +82,10 @@
 
     [mealTwo addTagsObject:mainCoursesTag];
     [mealTwo addTagsObject:pastaTag];
+    
+    //Create the only Order this application will support. But It is prepared to receive more orders in the future if they are needed.
+    MHSOrder *myOnlyLonelyOrder = [MHSOrder orderWithcontext:self.model.context];
+    //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
     
     
     /*
@@ -166,7 +185,7 @@
 -(void)autoSave{
     
     if (AUTO_SAVE) {
-        NSLog(@"Autoguardando....");
+        NSLog(@"Autosaving....");
         
         [self save];
         [self performSelector:@selector(autoSave)

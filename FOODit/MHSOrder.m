@@ -8,6 +8,14 @@
 
 @implementation MHSOrder
 
-// Custom logic goes here.
++(instancetype) orderWithcontext:(NSManagedObjectContext *) context{
+    
+    
+    MHSOrder *newOrder = [NSEntityDescription insertNewObjectForEntityForName:[MHSOrder entityName]
+                                                    inManagedObjectContext:context];
+    
+    return newOrder;
+}
+
 
 @end

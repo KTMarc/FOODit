@@ -1,5 +1,13 @@
 #import "_MHSMealOrder.h"
 
+
 @interface MHSMealOrder : _MHSMealOrder {}
-// Custom logic goes here.
+
++(instancetype) mealOrderWithMealCount:(NSNumber *)meal_count
+                        note_for_kitchen:(NSString *)note
+                                  meal: (MHSMeal *)meal
+                                 order: (MHSOrder *)order
+                     context:(NSManagedObjectContext *) context;
+
+
 @end

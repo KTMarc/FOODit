@@ -1,5 +1,9 @@
 #import "_MHSOrder.h"
 
 @interface MHSOrder : _MHSOrder {}
-// Custom logic goes here.
+
+
++(instancetype) orderWithcontext:(NSManagedObjectContext *)context;
+
+
 @end

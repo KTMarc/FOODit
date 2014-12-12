@@ -16,14 +16,14 @@
 }
 
 +(instancetype) tagWithName:(NSString *)name
-                        type:(NSString *)type
+                        tagType:(NSString *)type
                      context:(NSManagedObjectContext *) context{
     
     MHSTag *nt = [NSEntityDescription insertNewObjectForEntityForName:[MHSTag entityName]
                                                 inManagedObjectContext:context];
     
     nt.name = name;
-    nt.type = type;
+    nt.tagType = type;
 
     return nt;
 }

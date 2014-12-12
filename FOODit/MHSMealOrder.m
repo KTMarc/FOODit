@@ -8,6 +8,21 @@
 
 @implementation MHSMealOrder
 
-// Custom logic goes here.
++(instancetype) mealOrderWithMealCount:(NSNumber *)meal_count
+                      note_for_kitchen:(NSString *)note
+                                  meal: (MHSMeal *)meal
+                                 order: (MHSOrder *)order
+                               context:(NSManagedObjectContext *) context{
+    
+    MHSMealOrder *nmo = [NSEntityDescription insertNewObjectForEntityForName:[MHSMealOrder entityName]
+                                                inManagedObjectContext:context];
+    
+    nmo.meal_count = meal_count;
+    nmo.note_for_kitchen = note;
+    nmo.meal = meal;
+    nmo.order = order;
+    
+    return nmo;
+}
 
 @end

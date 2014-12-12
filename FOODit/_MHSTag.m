@@ -5,7 +5,7 @@
 
 const struct MHSTagAttributes MHSTagAttributes = {
 	.name = @"name",
-	.type = @"type",
+	.tagType = @"tagType",
 };
 
 const struct MHSTagRelationships MHSTagRelationships = {
@@ -43,7 +43,7 @@ const struct MHSTagRelationships MHSTagRelationships = {
 
 @dynamic name;
 
-@dynamic type;
+@dynamic tagType;
 
 @dynamic meals;
 

@@ -1,22 +1,20 @@
 //
-//  TableViewController.m
+//  MHSOrderViewController.m
 //  FOODit
 //
-//  Created by Marc Humet on 30/11/14.
+//  Created by Marc Humet on 12/12/14.
 //
 //
 
-#import "MHSMealsTableViewController.h"
+#import "MHSOrderTableViewController.h"
 #import "MHSMeal.h"
-#import "MHSMealOrder.h"
 #import "AppDelegate.h"
 
-
-@interface MHSMealsTableViewController ()
+@interface MHSOrderTableViewController ()
 
 @end
 
-@implementation MHSMealsTableViewController
+@implementation MHSOrderTableViewController
 
 #pragma mark - View Lifecycle
 
@@ -24,12 +22,12 @@
     [super viewWillAppear:animated];
     
     /* CORE DATA DB FILE LOCATION
-    NSString * NSTemporaryDirectory ( void );
-    NSLog(@"FILE PATH :%@", NSTemporaryDirectory());
+     NSString * NSTemporaryDirectory ( void );
+     NSLog(@"FILE PATH :%@", NSTemporaryDirectory());
      */
     
-    self.title = @"Meals";
-   
+    self.title = @"Orders";
+    
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
     
@@ -42,7 +40,7 @@
                                                                                 sectionNameKeyPath:nil
                                                                                          cacheName:nil];
     self.fetchedResultsController = results;
-  
+    
 }
 
 
@@ -60,15 +58,7 @@
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-
-    // Get the meal
-    MHSMeal *meal = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-   // MHSMealOrder *mealOrder =[MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:(nm) order:<#(MHSOrder *)#> context: [self.fetchedResultsController context]];
-    
-    
     //Add the meal to MealsOrders
-    
     
     //Update the Order Basket and show its view controller
     
@@ -91,9 +81,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 -(UITableViewCell *) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    // Get the meal
+    // Averiguar el notebook
     MHSMeal *nm = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        
+    
+    
     // Crear una celda
     static NSString *cellId = @"cellId";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -107,14 +98,15 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UILabel *descLabel = (UILabel*) [cell viewWithTag:11];
     descLabel.text = nm.desc;
-  
+    
     UILabel *priceLabel = (UILabel*) [cell viewWithTag:12];
     priceLabel.text = [NSString stringWithFormat: @"£"];
     priceLabel.text = [priceLabel.text stringByAppendingString:[nm.price stringValue]];
-       
+    
+    
     UIImageView *mealImageView = (UIImageView*)[cell viewWithTag:13];
     mealImageView.image = [nm imageDb];
-   
+    
     
     return cell;
 }
@@ -128,5 +120,16 @@ estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 350;
 }
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

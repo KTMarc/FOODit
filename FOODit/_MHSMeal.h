@@ -5,7 +5,6 @@
 
 extern const struct MHSMealAttributes {
 	__unsafe_unretained NSString *desc;
-	__unsafe_unretained NSString *image;
 	__unsafe_unretained NSString *mealID;
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *price;
@@ -34,10 +33,6 @@ extern const struct MHSMealRelationships {
 @property (nonatomic, strong) NSString* desc;
 
 //- (BOOL)validateDesc:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSData* image;
-
-//- (BOOL)validateImage:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* mealID;
 
@@ -93,9 +88,6 @@ extern const struct MHSMealRelationships {
 
 - (NSString*)primitiveDesc;
 - (void)setPrimitiveDesc:(NSString*)value;
-
-- (NSData*)primitiveImage;
-- (void)setPrimitiveImage:(NSData*)value;
 
 - (NSString*)primitiveMealID;
 - (void)setPrimitiveMealID:(NSString*)value;

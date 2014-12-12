@@ -1,5 +1,11 @@
 #import "_MHSPhoto.h"
+#import <UIKit/UIKit.h>
 
 @interface MHSPhoto : _MHSPhoto {}
-// Custom logic goes here.
+
+@property (nonatomic,strong) UIImage *image;
+
++(instancetype) photoWithImage: (UIImage *) image
+                       context: (NSManagedObjectContext *) context;
+
 @end

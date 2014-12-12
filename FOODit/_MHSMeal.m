@@ -5,7 +5,6 @@
 
 const struct MHSMealAttributes MHSMealAttributes = {
 	.desc = @"desc",
-	.image = @"image",
 	.mealID = @"mealID",
 	.name = @"name",
 	.price = @"price",
@@ -54,8 +53,6 @@ const struct MHSMealRelationships MHSMealRelationships = {
 }
 
 @dynamic desc;
-
-@dynamic image;
 
 @dynamic mealID;
 
