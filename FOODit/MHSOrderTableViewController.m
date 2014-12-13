@@ -8,7 +8,7 @@
 
 #import "MHSOrderTableViewController.h"
 #import "MHSMeal.h"
-#import "AppDelegate.h"
+
 
 @interface MHSOrderTableViewController ()
 

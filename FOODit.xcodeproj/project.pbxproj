@@ -18,6 +18,9 @@
 		4975EB691A2BA60E00F54354 /* MHSMealsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB681A2BA60E00F54354 /* MHSMealsTableViewController.m */; };
 		49BDA8E41A3B03E800022C18 /* unnamed2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDA8E31A3B03E800022C18 /* unnamed2.jpg */; };
 		49BDA8E71A3B073500022C18 /* MHSOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */; };
+		49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */; };
+		49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */; };
+		49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */; };
 		49C832991A33596D00A73B0F /* expand-button.svg in Resources */ = {isa = PBXBuildFile; fileRef = 49C832881A33596D00A73B0F /* expand-button.svg */; };
 		49C8329A1A33596D00A73B0F /* meal-card__curve.svg in Resources */ = {isa = PBXBuildFile; fileRef = 49C832891A33596D00A73B0F /* meal-card__curve.svg */; };
 		49C8329B1A33596D00A73B0F /* tag--charcoal.svg in Resources */ = {isa = PBXBuildFile; fileRef = 49C8328A1A33596D00A73B0F /* tag--charcoal.svg */; };
@@ -84,6 +87,12 @@
 		49BDA8E31A3B03E800022C18 /* unnamed2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed2.jpg; sourceTree = "<group>"; };
 		49BDA8E51A3B073500022C18 /* MHSOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderTableViewController.h; sourceTree = "<group>"; };
 		49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderTableViewController.m; sourceTree = "<group>"; };
+		49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderViewController.h; sourceTree = "<group>"; };
+		49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderViewController.m; sourceTree = "<group>"; };
+		49BDA8EB1A3B648900022C18 /* MHSMyUITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMyUITableView.h; sourceTree = "<group>"; };
+		49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMyUITableView.m; sourceTree = "<group>"; };
+		49BDA8EE1A3C667600022C18 /* MHSCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSCoreDataViewController.h; sourceTree = "<group>"; };
+		49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSCoreDataViewController.m; sourceTree = "<group>"; };
 		49C832881A33596D00A73B0F /* expand-button.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "expand-button.svg"; sourceTree = "<group>"; };
 		49C832891A33596D00A73B0F /* meal-card__curve.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "meal-card__curve.svg"; sourceTree = "<group>"; };
 		49C8328A1A33596D00A73B0F /* tag--charcoal.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "tag--charcoal.svg"; sourceTree = "<group>"; };
@@ -182,6 +191,8 @@
 				49C832CD1A33619100A73B0F /* Frameworks */,
 				49C832841A33590B00A73B0F /* Resources */,
 				4975EB4B1A2BA5DB00F54354 /* Main.storyboard */,
+				49BDA8EB1A3B648900022C18 /* MHSMyUITableView.h */,
+				49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */,
 				4975EB4E1A2BA5DB00F54354 /* Images.xcassets */,
 				49E9FD161A37AB8200F9BF50 /* Model.xcdatamodeld */,
 				4975EB3E1A2BA5DA00F54354 /* Supporting Files */,
@@ -307,8 +318,12 @@
 			children = (
 				49E9FD091A37628100F9BF50 /* MHSCoreDataTableViewController.h */,
 				49E9FD0A1A37628100F9BF50 /* MHSCoreDataTableViewController.m */,
+				49BDA8EE1A3C667600022C18 /* MHSCoreDataViewController.h */,
+				49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */,
 				4975EB671A2BA60E00F54354 /* MHSMealsTableViewController.h */,
 				4975EB681A2BA60E00F54354 /* MHSMealsTableViewController.m */,
+				49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */,
+				49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */,
 				49BDA8E51A3B073500022C18 /* MHSOrderTableViewController.h */,
 				49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */,
 			);
@@ -445,9 +460,12 @@
 				49307A1F1A3A3F12005B0937 /* _MHSPhoto.m in Sources */,
 				49C832BF1A335B5B00A73B0F /* MHSMealOrder.m in Sources */,
 				49E9FD0B1A37628100F9BF50 /* MHSCoreDataTableViewController.m in Sources */,
+				49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */,
 				49C832C11A335B5B00A73B0F /* MHSTag.m in Sources */,
 				4975EB691A2BA60E00F54354 /* MHSMealsTableViewController.m in Sources */,
+				49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */,
 				49C832C01A335B5B00A73B0F /* MHSOrder.m in Sources */,
+				49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */,
 				4975EB411A2BA5DA00F54354 /* main.m in Sources */,
 				49C832B31A335B5200A73B0F /* _MHSMealOrder.m in Sources */,
 			);

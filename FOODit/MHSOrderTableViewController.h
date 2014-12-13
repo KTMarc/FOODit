@@ -8,7 +8,7 @@
 
 #import "MHSCoreDataTableViewController.h"
 #import "MHSSimpleCoreDataStack.h"
-
+#import "AppDelegate.h"
 
 @interface MHSOrderTableViewController : MHSCoreDataTableViewController
 

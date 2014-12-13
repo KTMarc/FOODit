@@ -62,9 +62,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 
     // Get the meal
-    MHSMeal *meal = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-   // MHSMealOrder *mealOrder =[MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:(nm) order:<#(MHSOrder *)#> context: [self.fetchedResultsController context]];
+    //MHSMeal *meal = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+   // MHSMealOrder *mealOrder =[MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:(nm) order: context: [self.fetchedResultsController context]];
     
     
     //Add the meal to MealsOrders
@@ -72,22 +73,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //Update the Order Basket and show its view controller
     
-    
 }
-
 
 
 #pragma mark - Data Source
 
--(void) tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MHSMeal *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [self.fetchedResultsController.managedObjectContext deleteObject:del];
-    }
-}
 -(UITableViewCell *) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -114,7 +104,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
        
     UIImageView *mealImageView = (UIImageView*)[cell viewWithTag:13];
     mealImageView.image = [nm imageDb];
-   
     
     return cell;
 }
