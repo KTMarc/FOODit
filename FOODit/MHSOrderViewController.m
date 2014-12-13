@@ -71,24 +71,24 @@
      ascending:NO]];
      */
     
-    NSError *error = nil;
-    NSArray *results = [self.model.context executeFetchRequest:req
-                                                         error:&error];
+//    NSError *error = nil;
+//    NSArray *results = [self.model.context executeFetchRequest:req
+//                                                         error:&error];
     
-    if (results == nil) {
-        NSLog(@"Error fetching: %@", results);
-    }else{
-        //    NSLog(@"Results: %@", results);
-        NSNumber *bill = [[NSNumber alloc]initWithFloat:0.0];
-        for (MHSMealOrder* mealOrders in results) {
-            
-            NSLog(@"%@ %@ with the note: %@", mealOrders.meal_count,[mealOrders valueForKeyPath:@"meal.name"], mealOrders.note_for_kitchen);
-            bill = [mealOrders valueForKeyPath:@"order.bill"];
-            
-        }
-        NSLog(@"Total BILL right now:%@", bill);
-        
-    }
+//    if (results == nil) {
+//        NSLog(@"Error fetching: %@", results);
+//    }else{
+//        //    NSLog(@"Results: %@", results);
+//        NSNumber *bill = [[NSNumber alloc]initWithFloat:0.0];
+//        for (MHSMealOrder* mealOrders in results) {
+//            
+//           NSLog(@"%@ %@ with the note: %@", mealOrders.meal_count,[mealOrders valueForKeyPath:@"meal.name"], mealOrders.note_for_kitchen);
+//            bill = [mealOrders valueForKeyPath:@"order.bill"];
+//            
+//        }
+//        NSLog(@"Total BILL right now:%@", bill);
+//        
+//    }
     
 }
 
@@ -120,7 +120,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MHSMeal *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        MHSMealOrder *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:del];
     }
 }
@@ -129,7 +129,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     // Averiguar el notebook
-    MHSMeal *nm = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     
     // Crear una celda
@@ -141,14 +141,17 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     }
     
     UILabel *nameLabel = (UILabel*) [cell viewWithTag:10];
-    nameLabel.text = nm.name;
+    nameLabel.text = [mo valueForKeyPath:@"meal.name"];
     
-    UILabel *descLabel = (UILabel*) [cell viewWithTag:11];
-    descLabel.text = nm.desc;
+    UILabel *noteForKitchenLabel = (UILabel*) [cell viewWithTag:11];
+    noteForKitchenLabel.text = mo.note_for_kitchen;
     
     UILabel *priceLabel = (UILabel*) [cell viewWithTag:12];
     priceLabel.text = [NSString stringWithFormat: @"£"];
-    priceLabel.text = [priceLabel.text stringByAppendingString:[nm.price stringValue]];
+    priceLabel.text = [priceLabel.text stringByAppendingString:[[mo valueForKeyPath:@"meal.price"] stringValue]];
+    
+    UILabel *mealCountLabel = (UILabel*) [cell viewWithTag:13];
+    mealCountLabel.text = [mo.meal_count stringValue];
     
     
     return cell;
