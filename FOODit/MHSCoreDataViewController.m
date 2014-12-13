@@ -46,32 +46,8 @@
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    // Get the meal
-    
-    //MHSMeal *meal = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    // MHSMealOrder *mealOrder =[MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:(nm) order: context: [self.fetchedResultsController context]];
-    
-    
-    //Add the meal to MealsOrders
-    
-    
-    //Update the Order Basket and show its view controller
-    
 }
--(UITableViewCell *) tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    // Crear una celda
-    static NSString *cellId = @"cellId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:cellId];
-    }
-    return cell;
-    
-}
+
 
 #pragma mark - Fetching
 
@@ -112,6 +88,20 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 #pragma mark - UITableViewDataSource
+
+-(UITableViewCell *) tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    // Crear una celda
+    static NSString *cellId = @"cellId";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:cellId];
+    }
+    return cell;
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

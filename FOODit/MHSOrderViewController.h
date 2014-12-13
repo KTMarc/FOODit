@@ -11,14 +11,19 @@
 #import "MHSCoreDataTableViewController.h"
 #import "AppDelegate.h"
 #import "MHSMeal.h"
+#import "MHSMealOrder.h"
 #import "MHSCoreDataViewController.h"
 
 @interface MHSOrderViewController : MHSCoreDataViewController
 
 @property (strong, nonatomic) MHSSimpleCoreDataStack *model;
+@property (strong, nonatomic) MHSMeal *selectedMeal;
 
+//IB OUTLETS
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalPriceLabel;
+
+
 
 
 

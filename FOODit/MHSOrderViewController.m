@@ -8,6 +8,7 @@
 
 #import "MHSOrderViewController.h"
 
+
 @interface MHSOrderViewController ()
 
 @end
@@ -52,8 +53,10 @@
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
     
     
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.name
+    //list of MealOrders
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMealOrder entityName]];
+    
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.meal_count
                                                           ascending:NO]];
     
     NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
@@ -61,6 +64,32 @@
                                                                                 sectionNameKeyPath:nil
                                                                                          cacheName:nil];
     self.fetchedResultsController = results;
+    
+    
+    
+    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
+     ascending:NO]];
+     */
+    
+    NSError *error = nil;
+    NSArray *results = [self.model.context executeFetchRequest:req
+                                                         error:&error];
+    
+    if (results == nil) {
+        NSLog(@"Error fetching: %@", results);
+    }else{
+        //    NSLog(@"Results: %@", results);
+        NSNumber *bill = [[NSNumber alloc]initWithFloat:0.0];
+        for (MHSMealOrder* mealOrders in results) {
+            
+            NSLog(@"%@ %@ with the note: %@", mealOrders.meal_count,[mealOrders valueForKeyPath:@"meal.name"], mealOrders.note_for_kitchen);
+            bill = [mealOrders valueForKeyPath:@"order.bill"];
+            
+        }
+        NSLog(@"Total BILL right now:%@", bill);
+        
+    }
+    
 }
 
 

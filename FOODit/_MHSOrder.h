@@ -3,6 +3,10 @@
 
 @import CoreData;
 
+extern const struct MHSOrderAttributes {
+	__unsafe_unretained NSString *bill;
+} MHSOrderAttributes;
+
 extern const struct MHSOrderRelationships {
 	__unsafe_unretained NSString *mealOrders;
 } MHSOrderRelationships;
@@ -17,6 +21,14 @@ extern const struct MHSOrderRelationships {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) MHSOrderID* objectID;
+
+@property (nonatomic, strong) NSNumber* bill;
+
+@property (atomic) float billValue;
+- (float)billValue;
+- (void)setBillValue:(float)value_;
+
+//- (BOOL)validateBill:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *mealOrders;
 
@@ -33,6 +45,12 @@ extern const struct MHSOrderRelationships {
 @end
 
 @interface _MHSOrder (CoreDataGeneratedPrimitiveAccessors)
+
+- (NSNumber*)primitiveBill;
+- (void)setPrimitiveBill:(NSNumber*)value;
+
+- (float)primitiveBillValue;
+- (void)setPrimitiveBillValue:(float)value_;
 
 - (NSMutableSet*)primitiveMealOrders;
 - (void)setPrimitiveMealOrders:(NSMutableSet*)value;

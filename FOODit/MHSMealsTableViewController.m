@@ -32,6 +32,9 @@
    
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
+    _model = myAppDelegate.model;
+    
+    _order = myAppDelegate.order;
     
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.name
@@ -60,18 +63,20 @@
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-
+    
+   
+   //check if the user selected the whole cell or just the button. 
+    
     // Get the meal
-    
-    //MHSMeal *meal = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-   // MHSMealOrder *mealOrder =[MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:(nm) order: context: [self.fetchedResultsController context]];
+    MHSMeal *currentMeal = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     
     //Add the meal to MealsOrders
+    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order context:self.model.context];
     
+    _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [currentMeal.price floatValue])];
     
-    //Update the Order Basket and show its view controller
+    //NSLog(@"Current bill: %@", _order.bill);
     
 }
 
@@ -117,5 +122,16 @@ estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 350;
 }
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

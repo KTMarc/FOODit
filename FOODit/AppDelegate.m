@@ -83,8 +83,10 @@
     [mealTwo addTagsObject:mainCoursesTag];
     [mealTwo addTagsObject:pastaTag];
     
-    //Create the only Order this application will support. But It is prepared to receive more orders in the future if they are needed.
-    MHSOrder *myOnlyLonelyOrder = [MHSOrder orderWithcontext:self.model.context];
+    //Create the only Order this application will support. But It is prepared to receive more orders in the future if they are needed. That way the user can see his last orders.
+    
+    _order = [MHSOrder orderWithcontext:self.model.context];
+    
     //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
     
     
@@ -123,12 +125,11 @@
     NSArray *results = [self.model.context executeFetchRequest:req
                                                          error:&error];
     
-    
     if (results == nil) {
         NSLog(@"Error fetching: %@", results);
     }else{
     //    NSLog(@"Results: %@", results);
-        
+
         for (MHSMeal* meal in results) {
           //  NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.type"], [meal valueForKeyPath:@"tags.name"]);
         }
