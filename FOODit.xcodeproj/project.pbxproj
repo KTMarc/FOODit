@@ -15,12 +15,14 @@
 		4975EB4D1A2BA5DB00F54354 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4975EB4B1A2BA5DB00F54354 /* Main.storyboard */; };
 		4975EB4F1A2BA5DB00F54354 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4975EB4E1A2BA5DB00F54354 /* Images.xcassets */; };
 		4975EB5E1A2BA5DB00F54354 /* FOODitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB5D1A2BA5DB00F54354 /* FOODitTests.m */; };
-		4975EB691A2BA60E00F54354 /* MHSMealsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB681A2BA60E00F54354 /* MHSMealsTableViewController.m */; };
 		49BDA8E41A3B03E800022C18 /* unnamed2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDA8E31A3B03E800022C18 /* unnamed2.jpg */; };
 		49BDA8E71A3B073500022C18 /* MHSOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */; };
 		49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */; };
 		49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */; };
 		49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */; };
+		49BDA8F31A3C9BC600022C18 /* MHSMealsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8F11A3C9BC600022C18 /* MHSMealsTableViewController.m */; };
+		49BDA8FA1A3CA0C800022C18 /* MHSMealCardCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8F91A3CA0C800022C18 /* MHSMealCardCurve.m */; };
+		49BDA8FD1A3CA15200022C18 /* FOODitStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8FC1A3CA15200022C18 /* FOODitStyleKit.m */; };
 		49C832991A33596D00A73B0F /* expand-button.svg in Resources */ = {isa = PBXBuildFile; fileRef = 49C832881A33596D00A73B0F /* expand-button.svg */; };
 		49C8329A1A33596D00A73B0F /* meal-card__curve.svg in Resources */ = {isa = PBXBuildFile; fileRef = 49C832891A33596D00A73B0F /* meal-card__curve.svg */; };
 		49C8329B1A33596D00A73B0F /* tag--charcoal.svg in Resources */ = {isa = PBXBuildFile; fileRef = 49C8328A1A33596D00A73B0F /* tag--charcoal.svg */; };
@@ -82,8 +84,6 @@
 		4975EB571A2BA5DB00F54354 /* FOODitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FOODitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4975EB5C1A2BA5DB00F54354 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4975EB5D1A2BA5DB00F54354 /* FOODitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOODitTests.m; sourceTree = "<group>"; };
-		4975EB671A2BA60E00F54354 /* MHSMealsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHSMealsTableViewController.h; path = ../MHSMealsTableViewController.h; sourceTree = "<group>"; };
-		4975EB681A2BA60E00F54354 /* MHSMealsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHSMealsTableViewController.m; path = ../MHSMealsTableViewController.m; sourceTree = "<group>"; };
 		49BDA8E31A3B03E800022C18 /* unnamed2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed2.jpg; sourceTree = "<group>"; };
 		49BDA8E51A3B073500022C18 /* MHSOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderTableViewController.h; sourceTree = "<group>"; };
 		49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderTableViewController.m; sourceTree = "<group>"; };
@@ -93,6 +93,12 @@
 		49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMyUITableView.m; sourceTree = "<group>"; };
 		49BDA8EE1A3C667600022C18 /* MHSCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSCoreDataViewController.h; sourceTree = "<group>"; };
 		49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSCoreDataViewController.m; sourceTree = "<group>"; };
+		49BDA8F11A3C9BC600022C18 /* MHSMealsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMealsTableViewController.m; sourceTree = "<group>"; };
+		49BDA8F21A3C9BC600022C18 /* MHSMealsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMealsTableViewController.h; sourceTree = "<group>"; };
+		49BDA8F81A3CA0C800022C18 /* MHSMealCardCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMealCardCurve.h; sourceTree = "<group>"; };
+		49BDA8F91A3CA0C800022C18 /* MHSMealCardCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMealCardCurve.m; sourceTree = "<group>"; };
+		49BDA8FB1A3CA15200022C18 /* FOODitStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FOODitStyleKit.h; sourceTree = "<group>"; };
+		49BDA8FC1A3CA15200022C18 /* FOODitStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FOODitStyleKit.m; sourceTree = "<group>"; };
 		49C832881A33596D00A73B0F /* expand-button.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "expand-button.svg"; sourceTree = "<group>"; };
 		49C832891A33596D00A73B0F /* meal-card__curve.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "meal-card__curve.svg"; sourceTree = "<group>"; };
 		49C8328A1A33596D00A73B0F /* tag--charcoal.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "tag--charcoal.svg"; sourceTree = "<group>"; };
@@ -184,6 +190,7 @@
 		4975EB3D1A2BA5DA00F54354 /* FOODit */ = {
 			isa = PBXGroup;
 			children = (
+				49BDA8F41A3C9BDB00022C18 /* UI StyleKit */,
 				4975EB421A2BA5DA00F54354 /* AppDelegate.h */,
 				4975EB431A2BA5DA00F54354 /* AppDelegate.m */,
 				49C8325A1A333E0200A73B0F /* Core Data */,
@@ -226,6 +233,17 @@
 				4975EB5C1A2BA5DB00F54354 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49BDA8F41A3C9BDB00022C18 /* UI StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				49BDA8FB1A3CA15200022C18 /* FOODitStyleKit.h */,
+				49BDA8FC1A3CA15200022C18 /* FOODitStyleKit.m */,
+				49BDA8F81A3CA0C800022C18 /* MHSMealCardCurve.h */,
+				49BDA8F91A3CA0C800022C18 /* MHSMealCardCurve.m */,
+			);
+			name = "UI StyleKit";
 			sourceTree = "<group>";
 		};
 		49C8325A1A333E0200A73B0F /* Core Data */ = {
@@ -320,8 +338,8 @@
 				49E9FD0A1A37628100F9BF50 /* MHSCoreDataTableViewController.m */,
 				49BDA8EE1A3C667600022C18 /* MHSCoreDataViewController.h */,
 				49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */,
-				4975EB671A2BA60E00F54354 /* MHSMealsTableViewController.h */,
-				4975EB681A2BA60E00F54354 /* MHSMealsTableViewController.m */,
+				49BDA8F11A3C9BC600022C18 /* MHSMealsTableViewController.m */,
+				49BDA8F21A3C9BC600022C18 /* MHSMealsTableViewController.h */,
 				49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */,
 				49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */,
 				49BDA8E51A3B073500022C18 /* MHSOrderTableViewController.h */,
@@ -449,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4975EB441A2BA5DA00F54354 /* AppDelegate.m in Sources */,
+				49BDA8FA1A3CA0C800022C18 /* MHSMealCardCurve.m in Sources */,
 				49E9FD181A37AB8200F9BF50 /* Model.xcdatamodeld in Sources */,
 				49C832B41A335B5200A73B0F /* _MHSOrder.m in Sources */,
 				49C832B21A335B5200A73B0F /* _MHSMeal.m in Sources */,
@@ -461,8 +480,9 @@
 				49C832BF1A335B5B00A73B0F /* MHSMealOrder.m in Sources */,
 				49E9FD0B1A37628100F9BF50 /* MHSCoreDataTableViewController.m in Sources */,
 				49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */,
+				49BDA8FD1A3CA15200022C18 /* FOODitStyleKit.m in Sources */,
+				49BDA8F31A3C9BC600022C18 /* MHSMealsTableViewController.m in Sources */,
 				49C832C11A335B5B00A73B0F /* MHSTag.m in Sources */,
-				4975EB691A2BA60E00F54354 /* MHSMealsTableViewController.m in Sources */,
 				49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */,
 				49C832C01A335B5B00A73B0F /* MHSOrder.m in Sources */,
 				49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */,

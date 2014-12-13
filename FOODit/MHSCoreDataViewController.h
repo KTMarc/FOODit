@@ -14,7 +14,7 @@
 
 // The controller (this class fetches nothing if this is not set).
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UITableView *tableView;
 
 // Causes the fetchedResultsController to refetch the data.
 // You almost certainly never need to call this.
