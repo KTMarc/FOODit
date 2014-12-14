@@ -10,7 +10,7 @@
 #import "MHSMeal.h"
 #import "MHSMealOrder.h"
 #import "AppDelegate.h"
-
+#import "MHSTag.h"
 
 @interface MHSMealsTableViewController ()
 
@@ -109,6 +109,20 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
        
     UIImageView *mealImageView = (UIImageView*)[cell viewWithTag:13];
     mealImageView.image = [nm imageDb];
+    
+    //List of tags
+    NSArray *arrayDict = [nm valueForKeyPath:@"tags"];
+//    NSArray *filtered = [arrayDict filteredArrayUsingPredicate:
+//                              [NSPredicate predicateWithFormat:@"tagType == %@", @"course"]];
+    
+    NSArray *sortedItems = [arrayDict sortedArrayUsingDescriptors:@[[NSSortDescriptor
+                                                                     sortDescriptorWithKey:@"tagType" ascending:YES]]];
+//    NSLog(@"filetered Array: %@", arrayDict);
+//    NSLog(@"filetered Array: %@", filtered);
+//    NSLog(@"sorted Array: %@",sortedItems);
+    NSLog(@"sorted Array: %@",[sortedItems valueForKey:@"name"]);
+    //NSLog(@"\n MEAL: %@\n TagType:%@\n TagName:%@\n", nm.name, [nm valueForKeyPath:@"tags.tagType"], [nm valueForKeyPath:@"tags.name"]);
+    //Draw all all tag which aren't type:course
     
     return cell;
 }

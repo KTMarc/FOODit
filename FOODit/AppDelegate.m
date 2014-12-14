@@ -169,11 +169,11 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
                                            context:self.model.context];
     
     MHSTag *seafodTag =   [MHSTag tagWithName:@"seafood"
-                                      tagType:@"noType"
+                                      tagType:@""
                                       context:self.model.context];
     
     MHSTag *pastaTag =   [MHSTag tagWithName:@"pasta"
-                                     tagType:@"noType"
+                                     tagType:@""
                                      context:self.model.context];
     
     //Make relationships between meals and tags
@@ -198,12 +198,6 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
      req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
      ascending:NO]];
      
-     //List of tags
-     
-     req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
-     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
-     ascending:NO]];
-     
      
      //List of tags for a specific Meal mealID = @"cad2d2e8b16eb668f47b4f2827438951"
      
@@ -217,23 +211,24 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
      req.predicate = [NSPredicate predicateWithFormat:@"ANY meal = %@",[......];
      */
     
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
-     ascending:NO]];
-     */
-    NSError *error = nil;
-    NSArray *results = [self.model.context executeFetchRequest:req
-                                                         error:&error];
-
-    if (results == nil) {
-        NSLog(@"Error fetching: %@", results);
-    }else{
-        //    NSLog(@"Results: %@", results);
-        
-        for (MHSMeal* meal in results) {
-            NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.tagType"], [meal valueForKeyPath:@"tags.name"]);
-        }
-    }
+    //All tags for each meal
+//    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
+//    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
+//     ascending:NO]];
+//     */
+//    NSError *error = nil;
+//    NSArray *results = [self.model.context executeFetchRequest:req
+//                                                         error:&error];
+//
+//    if (results == nil) {
+//        NSLog(@"Error fetching: %@", results);
+//    }else{
+//        //    NSLog(@"Results: %@", results);
+//        
+//        for (MHSMeal* meal in results) {
+//            NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.tagType"], [meal valueForKeyPath:@"tags.name"]);
+//        }
+//    }
 }
 
 

@@ -46,9 +46,7 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-  
 
-  
     self.title = @"Orders";
     
     //We access the model we created in the app delegate
