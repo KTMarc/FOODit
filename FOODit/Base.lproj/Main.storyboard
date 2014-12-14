@@ -122,7 +122,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="13" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayq-Bv-S94">
-                                                    <rect key="frame" x="6" y="11" width="23" height="21"/>
+                                                    <rect key="frame" x="7" y="13" width="23" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -133,6 +133,20 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" tag="15" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOR-Wu-wXR">
+                                                    <rect key="frame" x="6" y="26" width="13" height="17"/>
+                                                    <state key="normal" title="-">
+                                                        <color key="titleColor" red="0.37254901960784315" green="0.23137254901960785" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUc-fv-qDk">
+                                                    <rect key="frame" x="2" y="-1" width="20" height="18"/>
+                                                    <state key="normal" title="+">
+                                                        <color key="titleColor" red="0.37254901959999998" green="0.23137254900000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.89155375874125875" green="0.22352941176470517" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
@@ -156,7 +170,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seo-kn-Mg7">
-                                <rect key="frame" x="11" y="521" width="189" height="36"/>
+                                <rect key="frame" x="16" y="521" width="189" height="36"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-MediumItalic" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Confirm your Order">
@@ -182,13 +196,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cbv-d7-cSn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3571" y="289"/>
+            <point key="canvasLocation" x="3571" y="288"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Poq-TF-K7f">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EnM-Oc-WKj" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GrB-2p-huH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -200,7 +215,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Qo-J7-2Ww" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2617" y="290"/>
+            <point key="canvasLocation" x="2733" y="290"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

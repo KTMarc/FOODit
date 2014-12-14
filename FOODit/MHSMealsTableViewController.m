@@ -28,7 +28,7 @@
     NSLog(@"FILE PATH :%@", NSTemporaryDirectory());
      */
     
-    self.title = @"Meals";
+    self.title = @"Your Delicious Restaurant";
    
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;

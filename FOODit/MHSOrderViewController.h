@@ -18,13 +18,12 @@
 
 @property (strong, nonatomic) MHSSimpleCoreDataStack *model;
 @property (strong, nonatomic) MHSMeal *selectedMeal;
+@property (strong, nonatomic) MHSOrder *order;
+
 
 //IB OUTLETS
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *totalPriceLabel;
-
-
-
 
 
 @end

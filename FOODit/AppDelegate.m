@@ -15,135 +15,33 @@
 #import "MHSMealsTableViewController.h"
 #import "MHSPhoto.h"
 #import "MHSOrder.h"
+#import "AFNetworking.h"
+#import "NSDictionary+meal.h"
+#import "AFNetworkActivityIndicatorManager.h"
+
+static NSString * const BaseURLString = @"http://localhost:8888/";
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    
     // Create the Core Data stack
     self.model = [MHSSimpleCoreDataStack coreDataStackWithModelName:@"Model"];
+   // [self autoSave];
     
+    [self loadLocalData];
     
-    [self autoSave];
-    
-   
-    //Create a Meal or two
-    MHSMeal *mealOne = [MHSMeal mealWithName:@"Seafood risotto"
-                                    desc:@"This seafood risotto recipe is infused with a number of fresh herbs, imparting remarkable flavour onto the risotto rice base. With scallops, prawns and mussels to make up the risotto but you can use whatever seafood is available and you like. Served with some cheddar rolls or a small avocado salad for a delicious seafood supper."
-                                    price:@9.5
-                                    mealID:@"cad2d2e8b16eb668f47b4f2827438951"
-                             primaryImageURL:@"http://lh5.ggpht.com/ASTYH5ZbfNpA5MOxUya9MfOXw8910PpbcvkAWeMFbjurfYvbqx1qnfLU091k3UyxGXUYDn_dNOMRsmCIE2ozwRAd"
-                                 context:self.model.context];
-    
-    UIImage *image1 =  [UIImage imageNamed:@"unnamed.jpg"];
-    MHSPhoto *photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
-    
-    [mealOne setPhoto:photo];
-    
-    
-    MHSMeal *mealTwo = [MHSMeal mealWithName:@"Penne bacon, green peas"
-                                     desc:@"Caramelized onions lend a slight sweetness to this hearty pasta dish, with Onion, Bacon, and Parmesan"
-                                    price:@8.5
-                                   mealID:@"6308e806b1233e111081666e82f7aac1"
-                              primaryImageURL:@"http://lh4.ggpht.com/xVItGb4gEo_f-q8G0jDTNbguDdS2NzaSz2fqti_a6f3egda7DLbTI0eGqdCgXakqT3TsezDlKDFtdNYWdGJvtw"
-                                  context:self.model.context];
-    
-    image1 =  [UIImage imageNamed:@"unnamed2.jpg"];
-    photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
-    
-    [mealTwo setPhoto:photo];
-    
-        
-    //Create tags
-    MHSTag *mainCoursesTag =  [MHSTag tagWithName:@"Main Courses"
-                                          tagType:@"course"
-                                          context:self.model.context];
-    
-    
-    MHSTag *pescetarianTag =   [MHSTag tagWithName:@"Pescetarian"
-                                           tagType:@"Diet"
-                                           context:self.model.context];
-    
-    MHSTag *seafodTag =   [MHSTag tagWithName:@"seafood"
-                                      tagType:@"noType"
-                                      context:self.model.context];
-    
-    MHSTag *pastaTag =   [MHSTag tagWithName:@"pasta"
-                                     tagType:@"noType"
-                                     context:self.model.context];
-    
-    //Make relationships between meals and tags
-    [mealOne addTagsObject:mainCoursesTag];
-    [mealOne addTagsObject:pescetarianTag];
-    [mealOne addTagsObject:seafodTag];
-    
-
-    [mealTwo addTagsObject:mainCoursesTag];
-    [mealTwo addTagsObject:pastaTag];
-    
-    //Create the only Order this application will support. But It is prepared to receive more orders in the future if they are needed. That way the user can see his last orders.
-    
-    _order = [MHSOrder orderWithcontext:self.model.context];
-    
-    //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
-    
-    
-    /*
-    //List of meals
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
-                                                          ascending:NO]];
-    
-    //List of tags
-  
-    req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
-                                                          ascending:NO]];
-   
-    
-    //List of tags for a specific Meal mealID = @"cad2d2e8b16eb668f47b4f2827438951"
-
-    
-    req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
-
-                             [MHSMealRelationships ]
-                                                          ascending:NO]];
-
-    req.predicate = [NSPredicate predicateWithFormat:@"ANY meal = %@",[......];
-      */               
-  
-
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
-                                                          ascending:NO]];
-    */
-    
-    NSError *error = nil;
-    NSArray *results = [self.model.context executeFetchRequest:req
-                                                         error:&error];
-    
-    if (results == nil) {
-        NSLog(@"Error fetching: %@", results);
-    }else{
-    //    NSLog(@"Results: %@", results);
-
-        for (MHSMeal* meal in results) {
-          //  NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.type"], [meal valueForKeyPath:@"tags.name"]);
-        }
-        
-    }
     return YES;
-
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-   // [self save];
+    // [self save];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -195,8 +93,148 @@
     }
 }
 
+-(void)loadRemoteData {
+    //AFNetworking
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    NSString *string = [NSString stringWithFormat:@"%@menu.json", BaseURLString];
+    
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        self.dict = (NSDictionary *)responseObject;
+        NSLog(@"Contenido del diccionario: %@", _dict);
+        NSLog(@"Cantidad de datos: %lu", (unsigned long)[_dict count]);
+        //       self.title = @"JSON Retrieved";
+        //       [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    [operation start];
+    
+}
 
 
+-(void)loadLocalData {
+    
+    //Create a Meal or two
+    MHSMeal *mealOne = [MHSMeal mealWithName:@"Seafood risotto"
+                                        desc:@"This seafood risotto recipe is infused with a number of fresh herbs, imparting remarkable flavour onto the risotto rice base. With scallops, prawns and mussels to make up the risotto but you can use whatever seafood is available and you like. Served with some cheddar rolls or a small avocado salad for a delicious seafood supper."
+                                       price:@9.5
+                                      mealID:@"cad2d2e8b16eb668f47b4f2827438951"
+                             primaryImageURL:@"http://lh5.ggpht.com/ASTYH5ZbfNpA5MOxUya9MfOXw8910PpbcvkAWeMFbjurfYvbqx1qnfLU091k3UyxGXUYDn_dNOMRsmCIE2ozwRAd"
+                                     context:self.model.context];
+    
+    UIImage *image1 =  [UIImage imageNamed:@"unnamed.jpg"];
+    MHSPhoto *photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
+    
+    [mealOne setPhoto:photo];
+    
+    
+    MHSMeal *mealTwo = [MHSMeal mealWithName:@"Penne bacon, green peas"
+                                        desc:@"Caramelized onions lend a slight sweetness to this hearty pasta dish, with Onion, Bacon, and Parmesan"
+                                       price:@8.5
+                                      mealID:@"6308e806b1233e111081666e82f7aac1"
+                             primaryImageURL:@"http://lh4.ggpht.com/xVItGb4gEo_f-q8G0jDTNbguDdS2NzaSz2fqti_a6f3egda7DLbTI0eGqdCgXakqT3TsezDlKDFtdNYWdGJvtw"
+                                     context:self.model.context];
+    
+    image1 =  [UIImage imageNamed:@"unnamed2.jpg"];
+    photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
+    
+    [mealTwo setPhoto:photo];
+    
+    
+    //Create tags
+    MHSTag *mainCoursesTag =  [MHSTag tagWithName:@"Main Courses"
+                                          tagType:@"course"
+                                          context:self.model.context];
+    
+    
+    MHSTag *pescetarianTag =   [MHSTag tagWithName:@"Pescetarian"
+                                           tagType:@"Diet"
+                                           context:self.model.context];
+    
+    MHSTag *seafodTag =   [MHSTag tagWithName:@"seafood"
+                                      tagType:@"noType"
+                                      context:self.model.context];
+    
+    MHSTag *pastaTag =   [MHSTag tagWithName:@"pasta"
+                                     tagType:@"noType"
+                                     context:self.model.context];
+    
+    //Make relationships between meals and tags
+    [mealOne addTagsObject:mainCoursesTag];
+    [mealOne addTagsObject:pescetarianTag];
+    [mealOne addTagsObject:seafodTag];
+    
+    
+    [mealTwo addTagsObject:mainCoursesTag];
+    [mealTwo addTagsObject:pastaTag];
+    
+    //Create the only Order this application will support. But It is prepared to receive more orders in the future if they are needed. That way the user can see his last orders.
+    
+    _order = [MHSOrder orderWithcontext:self.model.context];
+    
+    //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
+    
+    
+    /*
+     //List of meals
+     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
+     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
+     ascending:NO]];
+     
+     //List of tags
+     
+     req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
+     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
+     ascending:NO]];
+     
+     
+     //List of tags for a specific Meal mealID = @"cad2d2e8b16eb668f47b4f2827438951"
+     
+     
+     req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
+     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
+     
+     [MHSMealRelationships ]
+     ascending:NO]];
+     
+     req.predicate = [NSPredicate predicateWithFormat:@"ANY meal = %@",[......];
+     */
+    
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
+    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
+     ascending:NO]];
+     */
+    NSError *error = nil;
+    NSArray *results = [self.model.context executeFetchRequest:req
+                                                         error:&error];
+
+    if (results == nil) {
+        NSLog(@"Error fetching: %@", results);
+    }else{
+        //    NSLog(@"Results: %@", results);
+        
+        for (MHSMeal* meal in results) {
+            NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.tagType"], [meal valueForKeyPath:@"tags.name"]);
+        }
+    }
+}
 
 
 

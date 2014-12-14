@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
    }
 
@@ -42,21 +43,26 @@
      NSString * NSTemporaryDirectory ( void );
      NSLog(@"FILE PATH :%@", NSTemporaryDirectory());
      */
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    [self.tableView reloadData];
-    
-   
+  
+
+  
     self.title = @"Orders";
     
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
-    
-    
+    _order = myAppDelegate.order;
+    _order.bill = @0;
     //list of MealOrders
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMealOrder entityName]];
     
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.meal_count
+    
+//    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.note_for_kitchen
+//                                                          ascending:NO]];
+
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.note_for_kitchen
                                                           ascending:NO]];
     
     NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
@@ -102,37 +108,96 @@
 
 #pragma mark - Actions
 
-#pragma mark - Delegate
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)oneLessMeal:(id)sender
+{
+    //Get the superview from this button which will be our cell
+     UITableViewCell *clickedCell = (UITableViewCell *)[[sender superview] superview];
+    //From the cell get its index path.
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:clickedCell];
+    MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    //NSLog(@"Remove the meal: %@", mo);
+  
+    if ([mo.meal_count intValue] > 1) {
+        mo.meal_count = @(mo.meal_count.longLongValue - 1);
+    }else{
+     [self.fetchedResultsController.managedObjectContext deleteObject:mo];
+    }
+
+    [self updateBill];
+}
+
+- (void)oneMoreMeal:(id)sender
+{
+    //Get the superview from this button which will be our cell
+    UITableViewCell *clickedCell = (UITableViewCell *)[[sender superview] superview];
+    //From the cell get its index path.
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:clickedCell];
+    MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    //Add the meal to MealsOrders
+    //NSLog(@"Add 1 more meal like %@", mo);
     
-    //Update the Order Basket and show its view controller
-    
+    mo.meal_count = @(mo.meal_count.longLongValue + 1);
+    [self updateBill];
     
 }
+
+-(void) updateBill {
+  //  MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    _order.bill = @0.0;
+    [self.tableView reloadData];
+    
+    //    MHSMeal *meal;
+//    _order.bill = @0.0;
+//    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMealOrder entityName]];
+//    NSError *error = nil;
+//    NSArray *results = [self.model.context executeFetchRequest:req
+//                                                    error:&error];
+//    NSLog(@"Results: %@", results);
+//
+//    if (results == nil) {
+//        NSLog(@"Error fetching: %@", results);
+//    }else{
+//        for (MHSMealOrder* mealOrder in results) {
+//            meal = mealOrder.meal;
+//            _order.bill= @(_order.bill.floatValue + ((meal.price.floatValue) * mealOrder.meal_count.intValue));
+//        }
+//    }
+}
+
+#pragma mark - Delegate
+
+
 
 #pragma mark - Data Source
 
--(void) tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath{
+//-(void) tableView:(UITableView *)tableView
+//commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+//forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        MHSMealOrder *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//        [self.fetchedResultsController.managedObjectContext deleteObject:del];
+//    }
+//}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+
+    return [[self.fetchedResultsController sections] count];
     
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MHSMealOrder *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [self.fetchedResultsController.managedObjectContext deleteObject:del];
-    }
 }
+
+
 
 -(UITableViewCell *) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    // Averiguar el notebook
+    
     MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    MHSMeal *meal = mo.meal;
     
-    
-    // Crear una celda
     static NSString *cellId = @"orderCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
@@ -153,6 +218,21 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     UILabel *mealCountLabel = (UILabel*) [cell viewWithTag:13];
     mealCountLabel.text = [mo.meal_count stringValue];
     
+    UIButton *plus = (UIButton *) [cell viewWithTag:14];
+    [plus addTarget:self
+              action:@selector(oneMoreMeal:)
+    forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *minus = (UIButton *) [cell viewWithTag:15];
+    [minus addTarget:self
+              action:@selector(oneLessMeal:)
+    forControlEvents:UIControlEventTouchUpInside];
+    
+    _order.bill= @(((meal.price.floatValue) * mo.meal_count.intValue) + _order.bill.floatValue);
+
+   // NSLog(@"(meal price: %f *  mealOrder.meal_count: %i) + order.bill: %f)", meal.price.floatValue,mo.meal_count.intValue, _order.bill.floatValue);
+    
+    _totalPriceLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
     
     return cell;
 }

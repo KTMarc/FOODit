@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MHSSimpleCoreDataStack *model;
 @property (strong, nonatomic) MHSOrder *order;
+@property (strong, nonatomic) NSDictionary *dict;
 
 
 @end
