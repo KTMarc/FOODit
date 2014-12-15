@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13840\viewh13200\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\b\fs24 \cf0 README:
+\b0 \
+\
+
+\b Some notes about the implementation:
+\b0 \
+\
+I've focused on working with persistance in the device with Core Data. I hard coded two meals and put them to Core Data.\
+Core Data has a model prepared to have more than one Order (it was not a requirement but would be nice).\
+Photos in Core Data are a separate entity with the option of external Storage enabled for better performance\
+\
+JSON mapping to CORE DATA was going to be made but I didn't have more time to work on it. I would do it with AFNetworking. Actually you will see I started it and successfully read the JSON. The download of all pictures would be done in the background not blocking.\
+I set the server address in my appDelegate, after the #imports\
+\
+To add a Meal, touch any part of the cell except the button. To see the Order, touch the button\
+\
+To test the app, better to do it in a real device. Once launched the first time, close the app and open it again right form the device, not from Xcode. That way you can see how persistance works. Each time you open it, will have two more meals (because they are hard coded).\
+\
+\
+
+\b Missing Features:
+\b0 \
+\
+JSON mapping to Core Data.\
+\
+
+\b in List of Meals ViewController:
+\b0 \
+\'b7Tag icons are not displeyed graphically, but they are listed from the Database.\
+\
+\'b73 dots to expand the description. This should be easy.\
+\
+\'b7Alert View displaying the number of meals the user wants to order and the "Notes for the kitchen". I forced all new added meals to the order were one unit and "No chilli" was the note. This was not on the screenshots, but I would add it.\
+\
+
+\b in List of Orders ViewController:
+\b0 \
+\'b7Swipe from top to display this viewController\
+\'b7Section headers.\
+}
