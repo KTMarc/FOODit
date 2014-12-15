@@ -144,24 +144,10 @@
   //  MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     _order.bill = @0.0;
+
+    //BUG: Recalculation of Bill not working when reloading tableViewData
+    //Only works when going back to VC1 and then back to VC2
     [self.tableView reloadData];
-    
-    //    MHSMeal *meal;
-//    _order.bill = @0.0;
-//    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMealOrder entityName]];
-//    NSError *error = nil;
-//    NSArray *results = [self.model.context executeFetchRequest:req
-//                                                    error:&error];
-//    NSLog(@"Results: %@", results);
-//
-//    if (results == nil) {
-//        NSLog(@"Error fetching: %@", results);
-//    }else{
-//        for (MHSMealOrder* mealOrder in results) {
-//            meal = mealOrder.meal;
-//            _order.bill= @(_order.bill.floatValue + ((meal.price.floatValue) * mealOrder.meal_count.intValue));
-//        }
-//    }
 }
 
 #pragma mark - Delegate
@@ -182,7 +168,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     return [[self.fetchedResultsController sections] count];
     
 }
@@ -227,9 +212,7 @@
     forControlEvents:UIControlEventTouchUpInside];
     
     _order.bill= @(((meal.price.floatValue) * mo.meal_count.intValue) + _order.bill.floatValue);
-
    // NSLog(@"(meal price: %f *  mealOrder.meal_count: %i) + order.bill: %f)", meal.price.floatValue,mo.meal_count.intValue, _order.bill.floatValue);
-    
     _totalPriceLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
     
     return cell;

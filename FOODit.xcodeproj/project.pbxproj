@@ -28,6 +28,7 @@
 		4957BB9B1A3DF84E00892C45 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957BB891A3DF84E00892C45 /* UIRefreshControl+AFNetworking.m */; };
 		4957BB9C1A3DF84E00892C45 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957BB8B1A3DF84E00892C45 /* UIWebView+AFNetworking.m */; };
 		4957BB9F1A3DFBB200892C45 /* NSDictionary+meal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957BB9E1A3DFBB200892C45 /* NSDictionary+meal.m */; };
+		4957BBA21A3EBE7100892C45 /* MHSTagDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = 4957BBA11A3EBE7100892C45 /* MHSTagDraw.m */; };
 		4975EB411A2BA5DA00F54354 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB401A2BA5DA00F54354 /* main.m */; };
 		4975EB441A2BA5DA00F54354 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB431A2BA5DA00F54354 /* AppDelegate.m */; };
 		4975EB4D1A2BA5DB00F54354 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4975EB4B1A2BA5DB00F54354 /* Main.storyboard */; };
@@ -130,6 +131,8 @@
 		4957BB8B1A3DF84E00892C45 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		4957BB9D1A3DFBB200892C45 /* NSDictionary+meal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+meal.h"; sourceTree = "<group>"; };
 		4957BB9E1A3DFBB200892C45 /* NSDictionary+meal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+meal.m"; sourceTree = "<group>"; };
+		4957BBA01A3EBE7100892C45 /* MHSTagDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSTagDraw.h; sourceTree = "<group>"; };
+		4957BBA11A3EBE7100892C45 /* MHSTagDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSTagDraw.m; sourceTree = "<group>"; };
 		4975EB3B1A2BA5DA00F54354 /* FOODit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FOODit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4975EB3F1A2BA5DA00F54354 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4975EB401A2BA5DA00F54354 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -350,6 +353,8 @@
 			children = (
 				49BDA8FB1A3CA15200022C18 /* FOODitStyleKit.h */,
 				49BDA8FC1A3CA15200022C18 /* FOODitStyleKit.m */,
+				4957BBA01A3EBE7100892C45 /* MHSTagDraw.h */,
+				4957BBA11A3EBE7100892C45 /* MHSTagDraw.m */,
 				49BDA8F81A3CA0C800022C18 /* MHSMealCardCurve.h */,
 				49BDA8F91A3CA0C800022C18 /* MHSMealCardCurve.m */,
 			);
@@ -578,6 +583,7 @@
 			files = (
 				4957BB911A3DF84E00892C45 /* AFURLConnectionOperation.m in Sources */,
 				4975EB441A2BA5DA00F54354 /* AppDelegate.m in Sources */,
+				4957BBA21A3EBE7100892C45 /* MHSTagDraw.m in Sources */,
 				49BDA8FA1A3CA0C800022C18 /* MHSMealCardCurve.m in Sources */,
 				4957BB9F1A3DFBB200892C45 /* NSDictionary+meal.m in Sources */,
 				4957BB961A3DF84E00892C45 /* UIActivityIndicatorView+AFNetworking.m in Sources */,

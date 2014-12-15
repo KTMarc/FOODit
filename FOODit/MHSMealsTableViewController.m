@@ -11,6 +11,7 @@
 #import "MHSMealOrder.h"
 #import "AppDelegate.h"
 #import "MHSTag.h"
+#import "MHSTagDraw.h"
 
 @interface MHSMealsTableViewController ()
 
@@ -33,7 +34,6 @@
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
     _model = myAppDelegate.model;
-    
     _order = myAppDelegate.order;
     
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
@@ -112,18 +112,21 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //List of tags
     NSArray *arrayDict = [nm valueForKeyPath:@"tags"];
-//    NSArray *filtered = [arrayDict filteredArrayUsingPredicate:
-//                              [NSPredicate predicateWithFormat:@"tagType == %@", @"course"]];
-    
+
     NSArray *sortedItems = [arrayDict sortedArrayUsingDescriptors:@[[NSSortDescriptor
                                                                      sortDescriptorWithKey:@"tagType" ascending:YES]]];
-//    NSLog(@"filetered Array: %@", arrayDict);
-//    NSLog(@"filetered Array: %@", filtered);
-//    NSLog(@"sorted Array: %@",sortedItems);
-    NSLog(@"sorted Array: %@",[sortedItems valueForKey:@"name"]);
-    //NSLog(@"\n MEAL: %@\n TagType:%@\n TagName:%@\n", nm.name, [nm valueForKeyPath:@"tags.tagType"], [nm valueForKeyPath:@"tags.name"]);
-    //Draw all all tag which aren't type:course
-    
+    //NSLog(@"Tags from this meal:");
+    UILabel *tagsLabel = (UILabel*) [cell viewWithTag:14];
+    for (NSDictionary* dict in sortedItems) {
+        if (![[dict valueForKey:@"name"] containsString:@"Main"]){
+            //NSLog(@"%@",[dict valueForKey:@"name"]);
+            tagsLabel.text = [tagsLabel.text stringByAppendingString: [dict valueForKey:@"name"]];
+            tagsLabel.text = [tagsLabel.text stringByAppendingString: @" "];
+            
+            //TO-DO: Draw all all tags which are not type:course
+        }
+    }
+        
     return cell;
 }
 
