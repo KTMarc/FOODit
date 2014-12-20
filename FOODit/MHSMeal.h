@@ -13,6 +13,9 @@
              primaryImageURL: (NSString *)primaryImageURL
                          context:(NSManagedObjectContext *) context;
 
++(instancetype) mealWithDictionary:(NSDictionary *)mealDict
+                     context:(NSManagedObjectContext *) context;
+
 -(UIImage *) imageDb;
 
 @end

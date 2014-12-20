@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "MHSTag.h"
 #import "MHSTagDraw.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MHSMealsTableViewController ()
 
@@ -122,7 +123,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             //NSLog(@"%@",[dict valueForKey:@"name"]);
             tagsLabel.text = [tagsLabel.text stringByAppendingString: [dict valueForKey:@"name"]];
             tagsLabel.text = [tagsLabel.text stringByAppendingString: @" "];
-            
             //TO-DO: Draw all all tags which are not type:course
         }
     }

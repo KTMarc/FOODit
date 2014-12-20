@@ -6,4 +6,7 @@
                        tagType: (NSString *)type
                      context:(NSManagedObjectContext *) context;
 
++(instancetype) tagWithString:(NSString *)tagDict
+                    context:(NSManagedObjectContext *) context;
+
 @end

@@ -8,7 +8,7 @@
 
 @implementation MHSMeal
 
-// Custom logic goes here.
+//This is not needed yet...no KVO configured
 +(NSArray *)observableKeyNames{
       return @[@"name"];
 }
@@ -31,6 +31,22 @@
 
     return nm;
 }
+
++(instancetype) mealWithDictionary:(NSDictionary *)mealDict
+                           context:(NSManagedObjectContext *) context{
+    
+    MHSMeal *nm = [NSEntityDescription insertNewObjectForEntityForName:[MHSMeal entityName]
+                                                inManagedObjectContext:context];
+    
+    nm.name = [mealDict valueForKey:@"name"];
+    nm.desc = [mealDict valueForKey:@"description"];
+    nm.primaryImageUrl = [mealDict valueForKey:@"primaryImageURL"];
+    nm.price = [NSNumber numberWithFloat:[[mealDict valueForKey:@"price"] floatValue]];
+    nm.mealID = [mealDict valueForKey:@"id"];
+    
+    return nm;
+}
+
 
 -(UIImage *) imageDb {
     return [self.photo image];

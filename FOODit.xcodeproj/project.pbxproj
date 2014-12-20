@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492A904E1A44933000E0AE9F /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 492A904D1A44933000E0AE9F /* placeholder.jpg */; };
 		49307A1F1A3A3F12005B0937 /* _MHSPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 49307A1C1A3A3F12005B0937 /* _MHSPhoto.m */; };
 		49307A201A3A3F12005B0937 /* MHSPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 49307A1E1A3A3F12005B0937 /* MHSPhoto.m */; };
 		494F0ECC1A3A20D1007D8960 /* unnamed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 494F0ECB1A3A20D1007D8960 /* unnamed.jpg */; };
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		492A904D1A44933000E0AE9F /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		49307A1B1A3A3F12005B0937 /* _MHSPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MHSPhoto.h; sourceTree = "<group>"; };
 		49307A1C1A3A3F12005B0937 /* _MHSPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MHSPhoto.m; sourceTree = "<group>"; };
 		49307A1D1A3A3F12005B0937 /* MHSPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSPhoto.h; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 		49C832871A33596D00A73B0F /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				492A904D1A44933000E0AE9F /* placeholder.jpg */,
 				494F0ECB1A3A20D1007D8960 /* unnamed.jpg */,
 				49BDA8E31A3B03E800022C18 /* unnamed2.jpg */,
 				49C832881A33596D00A73B0F /* expand-button.svg */,
@@ -558,6 +561,7 @@
 				49C832A21A33596D00A73B0F /* tag--peanut.svg in Resources */,
 				49C832A51A33596D00A73B0F /* tag--snack.svg in Resources */,
 				494F0ECC1A3A20D1007D8960 /* unnamed.jpg in Resources */,
+				492A904E1A44933000E0AE9F /* placeholder.jpg in Resources */,
 				49C832A61A33596D00A73B0F /* tag--spicy.svg in Resources */,
 				49C832A31A33596D00A73B0F /* tag--pork.svg in Resources */,
 				49C832A01A33596D00A73B0F /* tag--lamb.svg in Resources */,

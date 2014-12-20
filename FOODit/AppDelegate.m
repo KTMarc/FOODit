@@ -18,6 +18,7 @@
 #import "AFNetworking.h"
 #import "NSDictionary+meal.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "UIImageView+AFNetworking.h"
 
 static NSString * const BaseURLString = @"http://localhost:8888/";
 
@@ -31,7 +32,9 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
     self.model = [MHSSimpleCoreDataStack coreDataStackWithModelName:@"Model"];
    // [self autoSave];
     
-    [self loadLocalData];
+    //[self loadLocalData];
+    
+    [self loadRemoteData];
     
     return YES;
     
@@ -109,10 +112,41 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
         
         
         self.dict = (NSDictionary *)responseObject;
-        NSLog(@"Contenido del diccionario: %@", _dict);
-        NSLog(@"Cantidad de datos: %lu", (unsigned long)[_dict count]);
+    //    NSLog(@"Contents of Dictionary: %@", _dict);
+    //    NSLog(@"Keys inside the resulting dictionary: %@", [_dict allKeys]);
+    //    NSLog(@"Count: %lu", (unsigned long)[_dict count]);
+        
         //       self.title = @"JSON Retrieved";
         //       [self.tableView reloadData];
+        //       NSLog(@"responseObject is a fucking %@", [_dict class]);
+
+//        NSArray *dictio = [_dict objectForKey:@"meals"];
+    //    NSLog(@"Objectforkey \"meals\" is a: %@", [[_dict objectForKey:@"meals"] class]);
+//        NSLog(@"Objectforkey \"meals\" fist position:%@", [[_dict objectForKey:@"meals"] objectAtIndex:0]);
+        
+  //      NSLog(@"Objectforkey \"meals\" fist position class is:%@", [[[_dict objectForKey:@"meals"] objectAtIndex:0] class]);
+        
+//        NSDictionary *dict2 = [[_dict objectForKey:@"meals"] objectAtIndex:1];
+         NSArray *arrayDicts = [_dict objectForKey:@"meals"];
+        NSArray *arrayTags;
+        
+        for (NSDictionary *dictPointer in arrayDicts){
+            [MHSMeal mealWithDictionary:dictPointer context:self.model.context];
+
+            arrayTags = [dictPointer valueForKey:@"tags"];
+            NSLog(@"Meal:%@", [dictPointer valueForKey:@"name"]);
+            
+            for (NSString *tagPointer in arrayTags){
+                 NSLog(@"     Tag in array:%@", tagPointer);
+                
+                [MHSTag tagWithString: tagPointer context:self.model.context];
+                //Link the tag with that meal in Core Data
+                
+            }
+        }
+        
+//        NSLog(@"Dictionary in position 1 has this inside %@", dict2);
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -122,10 +156,34 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
         [alertView show];
+        
     }];
     
     [operation start];
     
+    
+//    NSURL *urlImage = [NSURL URLWithString:@"http://lh5.ggpht.com/KioRENoZdDzKH-EJfQHtsjlSd3MfZT7v0j9XcmGs7l1SgB-_ybCu2m7hrH888n0s-MEFXdSOhzbaW6IWBwe5X5w"];
+//    NSURLRequest *requestImage = [NSURLRequest requestWithURL:urlImage];
+//    UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
+//    
+//    __weak UITableViewCell *weakCell = cell;
+//
+//    
+//    UIImage *image1 =  [UIImage imageNamed:@"unnamed.jpg"];
+//    
+//    [cell.imageView setImageWithURLRequest:request
+//                          placeholderImage:placeholderImage
+//                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image1) {
+//                                       
+////                                       weakCell.imageView.image = image;
+//  //                                     [weakCell setNeedsLayout];
+//
+//                                       MHSPhoto *photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
+//                                       
+//                                       [mealOne setPhoto:photo];
+//                                       
+//                                   } failure:nil];
+//    
 }
 
 
