@@ -39,15 +39,15 @@
     
     if ([tagDict hasPrefix:@"#"]){
         aux =[[tagDict substringFromIndex:1] componentsSeparatedByString: @":"];
-        nt.name = aux[0];
-        nt.tagType = aux[1];
-        NSLog(@"HAVE #");
-        NSLog(@"nt.name = %@", nt.name);
-        NSLog(@"nt.tagType = %@", nt.tagType);
+        nt.name = aux[1];
+        nt.tagType = aux[0];
+//        NSLog(@"HAVE #");
+//        NSLog(@"nt.name = %@", nt.name);
+//        NSLog(@"nt.tagType = %@", nt.tagType);
     } else {
         nt.name = tagDict;
-        NSLog(@"DOES NOT HAVE #");
-        NSLog(@"nt.name = %@", nt.name);
+//        NSLog(@"DOES NOT HAVE #");
+//        NSLog(@"nt.name = %@", nt.name);
     }
     
     

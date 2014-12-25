@@ -112,41 +112,93 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
         
         
         self.dict = (NSDictionary *)responseObject;
-    //    NSLog(@"Contents of Dictionary: %@", _dict);
-    //    NSLog(@"Keys inside the resulting dictionary: %@", [_dict allKeys]);
-    //    NSLog(@"Count: %lu", (unsigned long)[_dict count]);
         
-        //       self.title = @"JSON Retrieved";
-        //       [self.tableView reloadData];
-        //       NSLog(@"responseObject is a fucking %@", [_dict class]);
-
-//        NSArray *dictio = [_dict objectForKey:@"meals"];
-    //    NSLog(@"Objectforkey \"meals\" is a: %@", [[_dict objectForKey:@"meals"] class]);
-//        NSLog(@"Objectforkey \"meals\" fist position:%@", [[_dict objectForKey:@"meals"] objectAtIndex:0]);
-        
-  //      NSLog(@"Objectforkey \"meals\" fist position class is:%@", [[[_dict objectForKey:@"meals"] objectAtIndex:0] class]);
-        
-//        NSDictionary *dict2 = [[_dict objectForKey:@"meals"] objectAtIndex:1];
-         NSArray *arrayDicts = [_dict objectForKey:@"meals"];
+        NSArray *arrayDicts = [_dict objectForKey:@"meals"];
         NSArray *arrayTags;
+        NSMutableArray *sortedArrayTags = [[NSMutableArray alloc]init];
+        NSArray *aux;
+        NSError *error = nil;
+        MHSMeal *actualMeal;
+        MHSTag *newTag;
+        BOOL logs = NO;
+        
         
         for (NSDictionary *dictPointer in arrayDicts){
-            [MHSMeal mealWithDictionary:dictPointer context:self.model.context];
-
+            actualMeal = [MHSMeal mealWithDictionary:dictPointer context:self.model.context];
+            if (logs){NSLog(@"        Actual Meal:%@", [dictPointer valueForKey:@"name"]);}
             arrayTags = [dictPointer valueForKey:@"tags"];
-            NSLog(@"Meal:%@", [dictPointer valueForKey:@"name"]);
+            //NSLog(@"Array of Tags %@", arrayTags);
             
             for (NSString *tagPointer in arrayTags){
-                 NSLog(@"     Tag in array:%@", tagPointer);
-                
-                [MHSTag tagWithString: tagPointer context:self.model.context];
-                //Link the tag with that meal in Core Data
-                
+                if ([tagPointer hasPrefix:@"#"]){
+                    aux = [[tagPointer substringFromIndex:1] componentsSeparatedByString: @":"];
+                    [sortedArrayTags addObject: aux[1]];
+                    //NSLog(@"Name = %@", aux[1]);
+                    //NSLog(@"Type = %@", aux[0]);
+                } else{
+                    [sortedArrayTags addObject: tagPointer];
+                    //NSLog(@"Name = %@", [sortedArrayTags lastObject]);
+                }
             }
+            
+            //Implementing Find-or-Create Efficiently (Apple Documentation)
+            //https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdImporting.html
+            
+           // NSLog(@"Sorted Array using selector compare %@",[sortedArrayTags sortedArrayUsingSelector:@selector(compare:)]);
+            
+            
+            // Create the fetch request to get all Tags matching the actual Meal Tags
+            NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
+            [req setPredicate: [NSPredicate predicateWithFormat:@"(name IN %@)", [sortedArrayTags sortedArrayUsingSelector:@selector(compare:)]]];
+            
+            // make sure the results are sorted as well
+            [req setSortDescriptors:
+             @[[[NSSortDescriptor alloc] initWithKey: @"name" ascending:YES]]];
+            
+            //Finally, excute the fetch
+            NSArray *tagsMatchingNames = [self.model.context executeFetchRequest:req
+                                                                           error:&error];
+            
+            if (tagsMatchingNames == nil) {
+                if (logs){NSLog(@"Error fetching: %@", tagsMatchingNames);}
+            }else{
+                //You end up with two sorted arrays—one with the employee IDs passed into the fetch request, and one with the managed objects that matched them. To process them, you walk the sorted lists following these steps:
+                //Get the next ID and Employee. If the ID doesn't match the Employee ID, create a new Employee for that ID.
+                //Get the next Employee: if the IDs match, move to the next ID and Employee.
+                //Regardless of how many IDs you pass in, you only execute a single fetch, and the rest is just walking the result set.
+                
+                BOOL foundIt = false;
+                for (NSString *mealTagPointer in sortedArrayTags){
+                    
+                    for (MHSTag *matchingTag in tagsMatchingNames){
+                        
+                        if ([mealTagPointer isEqualToString: matchingTag.name]){
+                            //Tag found. Make relationships between meals and tags
+                            [actualMeal addTagsObject:matchingTag];
+                            if (logs){NSLog(@"                                 %@ ...Tag found: MAKE LINK", matchingTag.name);}
+                            foundIt = true;
+                        }
+                        
+                    } //End of amatching tags iteration
+                
+                    if (!foundIt){
+                        //Tag not found, create and then link to the actual meal
+                        newTag = [MHSTag tagWithString:mealTagPointer context:self.model.context];
+                        [actualMeal addTagsObject:newTag];
+                        if (logs){NSLog(@"%@ ... Tag NOT found, CREATE AND LINK", newTag.name);}
+                        
+                    } else {
+                        foundIt = false;
+                    }
+                    
+                    
+                } //End of actual Meal tags iteration
+                if (logs){NSLog(@"\n\n");}
+            }
+            //http://www.raywenderlich.com/59255/afnetworking-2-0-tutorial
+
+            [sortedArrayTags removeAllObjects];
         }
-        
-//        NSLog(@"Dictionary in position 1 has this inside %@", dict2);
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

@@ -72,7 +72,6 @@
 		49C832C81A33614500A73B0F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C832C71A33614500A73B0F /* MobileCoreServices.framework */; };
 		49C832CA1A33614F00A73B0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C832C91A33614F00A73B0F /* Security.framework */; };
 		49C832CC1A33615700A73B0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C832CB1A33615700A73B0F /* SystemConfiguration.framework */; };
-		49C832FF1A337AE100A73B0F /* menuNoTags.json in Resources */ = {isa = PBXBuildFile; fileRef = 49C832FE1A337AE100A73B0F /* menuNoTags.json */; };
 		49E9FD071A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E9FD061A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m */; };
 		49E9FD0B1A37628100F9BF50 /* MHSCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E9FD0A1A37628100F9BF50 /* MHSCoreDataTableViewController.m */; };
 		49E9FD181A37AB8200F9BF50 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E9FD161A37AB8200F9BF50 /* Model.xcdatamodeld */; };
@@ -199,7 +198,6 @@
 		49C832CB1A33615700A73B0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		49C832CE1A33622200A73B0F /* FOODit_Pefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOODit_Pefix.pch; sourceTree = "<group>"; };
 		49C832FC1A3364A000A73B0F /* menu.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = menu.json; sourceTree = "<group>"; };
-		49C832FE1A337AE100A73B0F /* menuNoTags.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = menuNoTags.json; sourceTree = "<group>"; };
 		49E9FD051A375BFE00F9BF50 /* MHSSimpleCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSSimpleCoreDataStack.h; sourceTree = "<group>"; };
 		49E9FD061A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSSimpleCoreDataStack.m; sourceTree = "<group>"; };
 		49E9FD081A375FDD00F9BF50 /* settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
@@ -404,7 +402,6 @@
 			isa = PBXGroup;
 			children = (
 				49C832FC1A3364A000A73B0F /* menu.json */,
-				49C832FE1A337AE100A73B0F /* menuNoTags.json */,
 				49C832871A33596D00A73B0F /* assets */,
 			);
 			name = Resources;
@@ -554,7 +551,6 @@
 				49C8329E1A33596D00A73B0F /* tag--grilled.svg in Resources */,
 				49C832A91A33596D00A73B0F /* tag--vegetarian.svg in Resources */,
 				49C832A41A33596D00A73B0F /* tag--seafood.svg in Resources */,
-				49C832FF1A337AE100A73B0F /* menuNoTags.json in Resources */,
 				49C832A71A33596D00A73B0F /* tag--starter.svg in Resources */,
 				49C8329D1A33596D00A73B0F /* tag--chicken.svg in Resources */,
 				49C8329B1A33596D00A73B0F /* tag--charcoal.svg in Resources */,
