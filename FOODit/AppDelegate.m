@@ -19,8 +19,12 @@
 #import "NSDictionary+meal.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "UIImageView+AFNetworking.h"
+#include <CommonCrypto/CommonDigest.h>
 
-static NSString * const BaseURLString = @"http://localhost:8888/";
+
+//static NSString * const BaseURLString = @"http://172.26.0.20:8888/";
+//static NSString * const BaseURLString = @"http://localhost:8888/";
+static NSString * const BaseURLString = @"http://www.humet.es/";
 
 @implementation AppDelegate
 
@@ -213,29 +217,8 @@ static NSString * const BaseURLString = @"http://localhost:8888/";
     
     [operation start];
     
-    
-//    NSURL *urlImage = [NSURL URLWithString:@"http://lh5.ggpht.com/KioRENoZdDzKH-EJfQHtsjlSd3MfZT7v0j9XcmGs7l1SgB-_ybCu2m7hrH888n0s-MEFXdSOhzbaW6IWBwe5X5w"];
-//    NSURLRequest *requestImage = [NSURLRequest requestWithURL:urlImage];
-//    UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
-//    
-//    __weak UITableViewCell *weakCell = cell;
-//
-//    
-//    UIImage *image1 =  [UIImage imageNamed:@"unnamed.jpg"];
-//    
-//    [cell.imageView setImageWithURLRequest:request
-//                          placeholderImage:placeholderImage
-//                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image1) {
-//                                       
-////                                       weakCell.imageView.image = image;
-//  //                                     [weakCell setNeedsLayout];
-//
-//                                       MHSPhoto *photo = [MHSPhoto photoWithImage:image1 context:self.model.context];
-//                                       
-//                                       [mealOne setPhoto:photo];
-//                                       
-//                                   } failure:nil];
-//    
+  
+ 
 }
 
 

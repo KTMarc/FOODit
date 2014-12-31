@@ -40,7 +40,7 @@
     
     nm.name = [mealDict valueForKey:@"name"];
     nm.desc = [mealDict valueForKey:@"description"];
-    nm.primaryImageUrl = [mealDict valueForKey:@"primaryImageURL"];
+    nm.primaryImageUrl = [mealDict valueForKey:@"primaryImageUrl"];
     nm.price = [NSNumber numberWithFloat:[[mealDict valueForKey:@"price"] floatValue]];
     nm.mealID = [mealDict valueForKey:@"id"];
     

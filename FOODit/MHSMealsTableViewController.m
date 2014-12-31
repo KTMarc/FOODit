@@ -39,7 +39,7 @@
     
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.name
-                                                          ascending:NO]];
+                                                          ascending:YES]];
     
     NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
                                                                               managedObjectContext:myAppDelegate.model.context
@@ -90,7 +90,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // Get the meal
     MHSMeal *nm = [self.fetchedResultsController objectAtIndexPath:indexPath];
         
-    // Crear una celda
+    // Create the cell
     static NSString *cellId = @"cellId";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
@@ -108,8 +108,40 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     priceLabel.text = [NSString stringWithFormat: @"£"];
     priceLabel.text = [priceLabel.text stringByAppendingString:[nm.price stringValue]];
        
+    
     UIImageView *mealImageView = (UIImageView*)[cell viewWithTag:13];
-    mealImageView.image = [nm imageDb];
+   
+    
+    if ([nm imageDb] != nil){ //Reading from CORE DATA
+
+        NSLog(@"Image found on CORE DATA");
+        mealImageView.image = [nm imageDb];
+        
+    } else{   //Read remotely async with AFNetworking
+    
+        NSLog(@"NO image inside meal. Loading from remote location");
+        NSURL *urlImage = [NSURL URLWithString:[nm primaryImageUrl]];
+        
+        NSLog(@"URL: %@", [nm primaryImageUrl]);
+        
+        NSURLRequest *requestImage = [NSURLRequest requestWithURL:urlImage];
+        UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
+        
+        __block UITableViewCell *weakCell = cell;
+        
+        [mealImageView setImageWithURLRequest:requestImage
+                             placeholderImage:placeholderImage
+                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                          
+                                          weakCell.imageView.image = image;
+                                          [weakCell setNeedsLayout];
+                                          
+                                          MHSPhoto *photo = [MHSPhoto photoWithImage:image context:self.model.context];
+                                          
+                                          [nm setPhoto:photo];
+                                      }
+                                      failure:nil];
+    }
     
     //List of tags
     NSArray *arrayDict = [nm valueForKeyPath:@"tags"];
