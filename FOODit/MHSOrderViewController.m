@@ -52,48 +52,19 @@
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
     _order = myAppDelegate.order;
-    _order.bill = @0;
+    
     //list of MealOrders
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMealOrder entityName]];
-    
-    
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: MHSMealOrderAttributes.mainCourse
+                                                          ascending:YES]];
 //    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.note_for_kitchen
 //                                                          ascending:NO]];
-
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.note_for_kitchen
-                                                          ascending:NO]];
-    
     NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
                                                                               managedObjectContext:myAppDelegate.model.context
                                                                                 sectionNameKeyPath:nil
                                                                                          cacheName:nil];
     self.fetchedResultsController = results;
-    
-    
-    
-    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
-     ascending:NO]];
-     */
-    
-//    NSError *error = nil;
-//    NSArray *results = [self.model.context executeFetchRequest:req
-//                                                         error:&error];
-    
-//    if (results == nil) {
-//        NSLog(@"Error fetching: %@", results);
-//    }else{
-//        //    NSLog(@"Results: %@", results);
-//        NSNumber *bill = [[NSNumber alloc]initWithFloat:0.0];
-//        for (MHSMealOrder* mealOrders in results) {
-//            
-//           NSLog(@"%@ %@ with the note: %@", mealOrders.meal_count,[mealOrders valueForKeyPath:@"meal.name"], mealOrders.note_for_kitchen);
-//            bill = [mealOrders valueForKeyPath:@"order.bill"];
-//            
-//        }
-//        NSLog(@"Total BILL right now:%@", bill);
-//        
-//    }
-    
+    [self updateBill];
 }
 
 
@@ -106,7 +77,7 @@
 
 #pragma mark - Actions
 
-- (void)oneLessMeal:(id)sender
+- (void)decreaseMeal:(id)sender
 {
     //Get the superview from this button which will be our cell
      UITableViewCell *clickedCell = (UITableViewCell *)[[sender superview] superview];
@@ -114,18 +85,15 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:clickedCell];
     MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    //NSLog(@"Remove the meal: %@", mo);
-  
-    if ([mo.meal_count intValue] > 1) {
-        mo.meal_count = @(mo.meal_count.longLongValue - 1);
-    }else{
-     [self.fetchedResultsController.managedObjectContext deleteObject:mo];
+    mo.meal_count = @(mo.meal_count.longLongValue - 1);
+    if ([mo.meal_count intValue] == 0) {
+       [self.fetchedResultsController.managedObjectContext deleteObject:mo];
     }
 
     [self updateBill];
 }
 
-- (void)oneMoreMeal:(id)sender
+- (void)increaseMeal:(id)sender
 {
     //Get the superview from this button which will be our cell
     UITableViewCell *clickedCell = (UITableViewCell *)[[sender superview] superview];
@@ -133,45 +101,28 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:clickedCell];
     MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    //NSLog(@"Add 1 more meal like %@", mo);
-    
     mo.meal_count = @(mo.meal_count.longLongValue + 1);
     [self updateBill];
     
 }
 
 -(void) updateBill {
-  //  MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     _order.bill = @0.0;
-
-    //BUG: Recalculation of Bill not working when reloading tableViewData
-    //Only works when going back to VC1 and then back to VC2
-    [self.tableView reloadData];
+    NSArray *results = [self.fetchedResultsController fetchedObjects];
+  
+    if (results == nil) {
+        NSLog(@"Error fetching: %@", results);
+    }else{
+        for (MHSMealOrder *mo in results) {
+            _order.bill = @((_order.bill.floatValue +  (mo.meal_count.intValue) * (mo.meal.price.floatValue)));
+        }
+        _totalPriceLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
+    }
 }
-
-#pragma mark - Delegate
-
 
 
 #pragma mark - Data Source
-
-//-(void) tableView:(UITableView *)tableView
-//commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-//forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        MHSMealOrder *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//        [self.fetchedResultsController.managedObjectContext deleteObject:del];
-//    }
-//}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[self.fetchedResultsController sections] count];
-    
-}
-
 
 
 -(UITableViewCell *) tableView:(UITableView *)tableView
@@ -179,7 +130,6 @@
     
     
     MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    MHSMeal *meal = mo.meal;
     
     static NSString *cellId = @"orderCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -197,26 +147,39 @@
     UILabel *priceLabel = (UILabel*) [cell viewWithTag:12];
     priceLabel.text = [NSString stringWithFormat: @"£"];
     priceLabel.text = [priceLabel.text stringByAppendingString:[[mo valueForKeyPath:@"meal.price"] stringValue]];
-    
+   
     UILabel *mealCountLabel = (UILabel*) [cell viewWithTag:13];
     mealCountLabel.text = [mo.meal_count stringValue];
     
     UIButton *plus = (UIButton *) [cell viewWithTag:14];
     [plus addTarget:self
-              action:@selector(oneMoreMeal:)
+              action:@selector(increaseMeal:)
     forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *minus = (UIButton *) [cell viewWithTag:15];
     [minus addTarget:self
-              action:@selector(oneLessMeal:)
+              action:@selector(decreaseMeal:)
     forControlEvents:UIControlEventTouchUpInside];
-    
-    _order.bill= @(((meal.price.floatValue) * mo.meal_count.intValue) + _order.bill.floatValue);
-   // NSLog(@"(meal price: %f *  mealOrder.meal_count: %i) + order.bill: %f)", meal.price.floatValue,mo.meal_count.intValue, _order.bill.floatValue);
-    _totalPriceLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
-    
+    [self updateBill];
     return cell;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+}
+
+
+//-(void) tableView:(UITableView *)tableView
+//commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+//forRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        MHSMealOrder *del = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//        [self.fetchedResultsController.managedObjectContext deleteObject:del];
+//    }
+//}
+
 
 - (CGFloat)tableView:(UITableView *)tableView
 estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -227,6 +190,8 @@ estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 43;
 }
+
+#pragma mark - Delegate
 
 
 /*

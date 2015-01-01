@@ -22,7 +22,6 @@
 #include <CommonCrypto/CommonDigest.h>
 
 
-//static NSString * const BaseURLString = @"http://172.26.0.20:8888/";
 //static NSString * const BaseURLString = @"http://localhost:8888/";
 static NSString * const BaseURLString = @"http://www.humet.es/";
 
@@ -34,7 +33,13 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     
     // Create the Core Data stack
     self.model = [MHSSimpleCoreDataStack coreDataStackWithModelName:@"Model"];
-   // [self autoSave];
+   
+    //Create the only Order this application will support. But It is prepared to receive more orders in the future
+    //if they are needed. That way the user can see his last orders.
+    _order = [MHSOrder orderWithcontext:self.model.context];
+    
+    
+    [self autoSave];
     
     //[self loadLocalData];
     
@@ -78,7 +83,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
 }
 
 
-#pragma mark - Utils
+#pragma mark - CORE DATA Utils
 
 
 -(void)save{
@@ -100,6 +105,8 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     }
 }
 
+#pragma mark - PARSING
+
 -(void)loadRemoteData {
     //AFNetworking
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
@@ -114,95 +121,8 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        
-        self.dict = (NSDictionary *)responseObject;
-        
-        NSArray *arrayDicts = [_dict objectForKey:@"meals"];
-        NSArray *arrayTags;
-        NSMutableArray *sortedArrayTags = [[NSMutableArray alloc]init];
-        NSArray *aux;
-        NSError *error = nil;
-        MHSMeal *actualMeal;
-        MHSTag *newTag;
-        BOOL logs = NO;
-        
-        
-        for (NSDictionary *dictPointer in arrayDicts){
-            actualMeal = [MHSMeal mealWithDictionary:dictPointer context:self.model.context];
-            if (logs){NSLog(@"        Actual Meal:%@", [dictPointer valueForKey:@"name"]);}
-            arrayTags = [dictPointer valueForKey:@"tags"];
-            //NSLog(@"Array of Tags %@", arrayTags);
-            
-            for (NSString *tagPointer in arrayTags){
-                if ([tagPointer hasPrefix:@"#"]){
-                    aux = [[tagPointer substringFromIndex:1] componentsSeparatedByString: @":"];
-                    [sortedArrayTags addObject: aux[1]];
-                    //NSLog(@"Name = %@", aux[1]);
-                    //NSLog(@"Type = %@", aux[0]);
-                } else{
-                    [sortedArrayTags addObject: tagPointer];
-                    //NSLog(@"Name = %@", [sortedArrayTags lastObject]);
-                }
-            }
-            
-            //Implementing Find-or-Create Efficiently (Apple Documentation)
-            //https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdImporting.html
-            
-           // NSLog(@"Sorted Array using selector compare %@",[sortedArrayTags sortedArrayUsingSelector:@selector(compare:)]);
-            
-            
-            // Create the fetch request to get all Tags matching the actual Meal Tags
-            NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
-            [req setPredicate: [NSPredicate predicateWithFormat:@"(name IN %@)", [sortedArrayTags sortedArrayUsingSelector:@selector(compare:)]]];
-            
-            // make sure the results are sorted as well
-            [req setSortDescriptors:
-             @[[[NSSortDescriptor alloc] initWithKey: @"name" ascending:YES]]];
-            
-            //Finally, excute the fetch
-            NSArray *tagsMatchingNames = [self.model.context executeFetchRequest:req
-                                                                           error:&error];
-            
-            if (tagsMatchingNames == nil) {
-                if (logs){NSLog(@"Error fetching: %@", tagsMatchingNames);}
-            }else{
-                //You end up with two sorted arrays—one with the employee IDs passed into the fetch request, and one with the managed objects that matched them. To process them, you walk the sorted lists following these steps:
-                //Get the next ID and Employee. If the ID doesn't match the Employee ID, create a new Employee for that ID.
-                //Get the next Employee: if the IDs match, move to the next ID and Employee.
-                //Regardless of how many IDs you pass in, you only execute a single fetch, and the rest is just walking the result set.
-                
-                BOOL foundIt = false;
-                for (NSString *mealTagPointer in sortedArrayTags){
-                    
-                    for (MHSTag *matchingTag in tagsMatchingNames){
-                        
-                        if ([mealTagPointer isEqualToString: matchingTag.name]){
-                            //Tag found. Make relationships between meals and tags
-                            [actualMeal addTagsObject:matchingTag];
-                            if (logs){NSLog(@"                                 %@ ...Tag found: MAKE LINK", matchingTag.name);}
-                            foundIt = true;
-                        }
-                        
-                    } //End of amatching tags iteration
-                
-                    if (!foundIt){
-                        //Tag not found, create and then link to the actual meal
-                        newTag = [MHSTag tagWithString:mealTagPointer context:self.model.context];
-                        [actualMeal addTagsObject:newTag];
-                        if (logs){NSLog(@"%@ ... Tag NOT found, CREATE AND LINK", newTag.name);}
-                        
-                    } else {
-                        foundIt = false;
-                    }
-                    
-                    
-                } //End of actual Meal tags iteration
-                if (logs){NSLog(@"\n\n");}
-            }
-            //http://www.raywenderlich.com/59255/afnetworking-2-0-tutorial
-
-            [sortedArrayTags removeAllObjects];
-        }
+        [self parseResponseWith:operation withResponse:responseObject];
+      
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -216,9 +136,119 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     }];
     
     [operation start];
+}
+
+
+-(void) parseResponseWith:(AFHTTPRequestOperation *)operation
+             withResponse:(id) responseObject{
     
-  
- 
+    self.dict = (NSDictionary *)responseObject;
+    
+    NSArray *arrayDicts = [_dict objectForKey:@"meals"];
+    NSArray *arrayTags;
+    MHSMeal *actualMeal;
+    BOOL logs = NO;
+    BOOL isMainCourse = NO;
+    
+    
+    for (NSDictionary *dictPointer in arrayDicts){
+        actualMeal = [MHSMeal mealWithDictionary:dictPointer context:self.model.context];
+        if (logs){NSLog(@"        Actual Meal:%@", [dictPointer valueForKey:@"name"]);}
+        arrayTags = [dictPointer valueForKey:@"tags"];
+        //NSLog(@"Array of Tags %@", arrayTags);
+        
+        isMainCourse = [self tagProcessWith:arrayTags fromMeal:actualMeal logs:logs];
+        [actualMeal setMainCourseValue: isMainCourse];
+        
+    } //meals iteration
+}
+
+
+-(BOOL) tagProcessWith:(NSArray *)arrayTags
+              fromMeal: (MHSMeal *)actualMeal
+                  logs:(BOOL) logs{
+
+    NSMutableArray *sortedArrayTags = [[NSMutableArray alloc]init];
+    NSArray *aux;
+    NSError *error = nil;
+    MHSTag *newTag;
+    BOOL isMainCourse = NO;
+
+    /* ---------------------TAG PROCESSING---------------------*/
+    for (NSString *tagPointer in arrayTags){
+        if ([tagPointer hasPrefix:@"#"]){
+            aux = [[tagPointer substringFromIndex:1] componentsSeparatedByString: @":"];
+            [sortedArrayTags addObject: aux[1]];
+            if ([tagPointer containsString:@"Main"]) {
+                NSLog(@"it is a Main Course");
+                isMainCourse=YES;
+            }
+            //NSLog(@"Name = %@", aux[1]);
+            //NSLog(@"Type = %@", aux[0]);
+        } else{
+            [sortedArrayTags addObject: tagPointer];
+            //NSLog(@"Name = %@", [sortedArrayTags lastObject]);
+        }
+    }
+    
+    //Implementing Find-or-Create Efficiently (Apple Documentation)
+    //https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdImporting.html
+    
+    // NSLog(@"Sorted Array using selector compare %@",[sortedArrayTags sortedArrayUsingSelector:@selector(compare:)]);
+    
+    // Create the fetch request to get all Tags matching the actual Meal Tags
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
+    [req setPredicate: [NSPredicate predicateWithFormat:@"(name IN %@)", [sortedArrayTags sortedArrayUsingSelector:@selector(compare:)]]];
+    
+    // make sure the results are sorted as well
+    [req setSortDescriptors:
+     @[[[NSSortDescriptor alloc] initWithKey: @"name" ascending:YES]]];
+    
+    //Finally, excute the fetch
+    NSArray *tagsMatchingNames = [self.model.context executeFetchRequest:req
+                                                                   error:&error];
+    
+    if (tagsMatchingNames == nil) {
+        if (logs){NSLog(@"Error fetching: %@", tagsMatchingNames);}
+    }else{
+        //You end up with two sorted arrays—one with the employee IDs passed into the fetch request, and one with the managed objects that matched them. To process them, you walk the sorted lists following these steps:
+        //Get the next ID and Employee. If the ID doesn't match the Employee ID, create a new Employee for that ID.
+        //Get the next Employee: if the IDs match, move to the next ID and Employee.
+        //Regardless of how many IDs you pass in, you only execute a single fetch, and the rest is just walking the result set.
+        
+        BOOL foundIt = false;
+        for (NSString *mealTagPointer in sortedArrayTags){
+            
+            for (MHSTag *matchingTag in tagsMatchingNames){
+                
+                if ([mealTagPointer isEqualToString: matchingTag.name]){
+                    //Tag found. Make relationships between meals and tags
+                    [actualMeal addTagsObject:matchingTag];
+                    if (logs){NSLog(@"                                 %@ ...Tag found: MAKE LINK", matchingTag.name);}
+                    foundIt = true;
+                }
+                
+            } //End of matching tags iteration
+            
+            if (!foundIt){
+                //Tag not found, create and then link to the actual meal
+                newTag = [MHSTag tagWithString:mealTagPointer context:self.model.context];
+                [actualMeal addTagsObject:newTag];
+                if (logs){NSLog(@"%@ ... Tag NOT found, CREATE AND LINK", newTag.name);}
+                
+            } else {
+                foundIt = false;
+            }
+            
+            
+        } //End of actual Meal tags iteration
+        if (logs){NSLog(@"\n\n");}
+    }
+    //http://www.raywenderlich.com/59255/afnetworking-2-0-tutorial
+    
+    [sortedArrayTags removeAllObjects];
+
+    return isMainCourse;
 }
 
 
@@ -278,12 +308,13 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     [mealTwo addTagsObject:mainCoursesTag];
     [mealTwo addTagsObject:pastaTag];
     
-    //Create the only Order this application will support. But It is prepared to receive more orders in the future if they are needed. That way the user can see his last orders.
+    
+    //Create the only Order this application will support. But It is prepared to receive more orders in the future
+    //if they are needed. That way the user can see his last orders.
     
     _order = [MHSOrder orderWithcontext:self.model.context];
-    
     //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
-    
+       
     
     /*
      //List of meals

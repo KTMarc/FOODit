@@ -2,6 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Meal" representedClassName="MHSMeal" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mainCourse" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="mealID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -11,13 +12,14 @@
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="meals" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="MealOrder" representedClassName="MHSMealOrder" syncable="YES">
+        <attribute name="mainCourse" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="meal_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="note_for_kitchen" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="mealOrders" inverseEntity="Meal" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="mealOrders" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="Order" representedClassName="MHSOrder" syncable="YES">
-        <attribute name="bill" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="bill" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="mealOrders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealOrder" inverseName="order" inverseEntity="MealOrder" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="MHSPhoto" syncable="YES">
@@ -30,10 +32,10 @@
         <relationship name="meals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="tags" inverseEntity="Meal" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Meal" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MealOrder" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Order" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Tag" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Meal" positionX="-504" positionY="-144" width="128" height="178"/>
+        <element name="MealOrder" positionX="-576" positionY="162" width="128" height="118"/>
+        <element name="Order" positionX="-72" positionY="267" width="128" height="73"/>
+        <element name="Photo" positionX="-801" positionY="-48" width="128" height="75"/>
+        <element name="Tag" positionX="-243" positionY="72" width="128" height="90"/>
     </elements>
 </model>

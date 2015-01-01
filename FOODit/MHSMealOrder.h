@@ -7,6 +7,7 @@
                         note_for_kitchen:(NSString *)note
                                   meal: (MHSMeal *)meal
                                  order: (MHSOrder *)order
+                            mainCourse: (BOOL) mainCourse
                      context:(NSManagedObjectContext *) context;
 
 

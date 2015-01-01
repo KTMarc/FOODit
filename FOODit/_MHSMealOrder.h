@@ -4,6 +4,7 @@
 @import CoreData;
 
 extern const struct MHSMealOrderAttributes {
+	__unsafe_unretained NSString *mainCourse;
 	__unsafe_unretained NSString *meal_count;
 	__unsafe_unretained NSString *note_for_kitchen;
 } MHSMealOrderAttributes;
@@ -24,6 +25,10 @@ extern const struct MHSMealOrderRelationships {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) MHSMealOrderID* objectID;
+
+@property (nonatomic, strong) NSString* mainCourse;
+
+//- (BOOL)validateMainCourse:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* meal_count;
 
@@ -48,6 +53,9 @@ extern const struct MHSMealOrderRelationships {
 @end
 
 @interface _MHSMealOrder (CoreDataGeneratedPrimitiveAccessors)
+
+- (NSString*)primitiveMainCourse;
+- (void)setPrimitiveMainCourse:(NSString*)value;
 
 - (NSNumber*)primitiveMeal_count;
 - (void)setPrimitiveMeal_count:(NSNumber*)value;

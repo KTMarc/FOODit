@@ -4,6 +4,7 @@
 #import "_MHSMealOrder.h"
 
 const struct MHSMealOrderAttributes MHSMealOrderAttributes = {
+	.mainCourse = @"mainCourse",
 	.meal_count = @"meal_count",
 	.note_for_kitchen = @"note_for_kitchen",
 };
@@ -47,6 +48,8 @@ const struct MHSMealOrderRelationships MHSMealOrderRelationships = {
 
 	return keyPaths;
 }
+
+@dynamic mainCourse;
 
 @dynamic meal_count;
 

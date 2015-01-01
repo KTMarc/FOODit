@@ -73,7 +73,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     //Add the meal to MealsOrders
-    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order context:self.model.context];
+    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order mainCourse: currentMeal.mainCourseValue context:self.model.context];
     
     _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [currentMeal.price floatValue])];
     
@@ -107,27 +107,27 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UILabel *priceLabel = (UILabel*) [cell viewWithTag:12];
     priceLabel.text = [NSString stringWithFormat: @"£"];
     priceLabel.text = [priceLabel.text stringByAppendingString:[nm.price stringValue]];
-       
+  
     
     UIImageView *mealImageView = (UIImageView*)[cell viewWithTag:13];
    
     
     if ([nm imageDb] != nil){ //Reading from CORE DATA
 
-        NSLog(@"Image found on CORE DATA");
+      //  NSLog(@"Image found on CORE DATA");
         mealImageView.image = [nm imageDb];
         
     } else{   //Read remotely async with AFNetworking
     
-        NSLog(@"NO image inside meal. Loading from remote location");
+       // NSLog(@"NO image inside meal. Loading from remote location");
         NSURL *urlImage = [NSURL URLWithString:[nm primaryImageUrl]];
         
-        NSLog(@"URL: %@", [nm primaryImageUrl]);
+        //NSLog(@"URL: %@", [nm primaryImageUrl]);
         
         NSURLRequest *requestImage = [NSURLRequest requestWithURL:urlImage];
         UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
         
-        __block UITableViewCell *weakCell = cell;
+        __weak UITableViewCell *weakCell = cell;
         
         [mealImageView setImageWithURLRequest:requestImage
                              placeholderImage:placeholderImage

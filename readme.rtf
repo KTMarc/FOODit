@@ -11,28 +11,39 @@
 \b Some notes about the implementation:
 \b0 \
 \
-I've focused on working with persistance in the device with Core Data. I hard coded two meals and put them to Core Data.\
+I've focused on working with persistance in the device with Core Data. \
 Core Data has a model prepared to have more than one Order (it was not a requirement but would be nice).\
 Photos in Core Data are a separate entity with the option of external Storage enabled for better performance\
 \
-JSON mapping to CORE DATA was going to be made but I didn't have more time to work on it. I would do it with AFNetworking. Actually you will see I started it and successfully read the JSON. The download of all pictures would be done in the background not blocking.\
+JSON mapping to CORE DATA is done with AFNetworking. \
+The download of all pictures is done in the background async (not blocking)\
 I set the server address in my appDelegate, after the #imports\
 \
 To add a Meal, touch any part of the cell except the button. To see the Order, touch the button\
 \
 To test the app, better to do it in a real device. Once launched the first time, close the app and open it again right form the device, not from Xcode. That way you can see how persistance works. Each time you open it, will have two more meals (because they are hard coded).\
 \
-\
+CORE DATA Autosave option is disabled for testing.\
+To enable it: \
+change the first line in \'93Supporting files > settings.h\'94\
 
-\b Missing Features:
+\b 	#define AUTO_SAVE YES
 \b0 \
 \
-JSON mapping to Core Data.\
+
+\b \
+Missing Features:
+\b0 \
+\
+- When the mobile is online, the application should cache the [menu data](/data/menu.json) in the mobile data store and periodically check for updates \'97\'97> 
+\b How to detect the update? there is no timestamp to check if there\'92s something new? We should check and compare field by field if there is any difference from the last JSON.
+\b0 \
+\
 \
 
 \b in List of Meals ViewController:
 \b0 \
-\'b7Tag icons are not displeyed graphically, but they are listed from the Database.\
+\'b7Tag icons are not displayed graphically, but they are listed from the Database.\
 \
 \'b73 dots to expand the description. This should be easy.\
 \
@@ -44,10 +55,4 @@ JSON mapping to Core Data.\
 \'b7Swipe from top to display this viewController\
 \'b7Section headers.\
 \
-\
-
-\b - It should be as true to the designs as possible, but candidates should feel free to add anything that improves the flow/design, using touch and gestures where applicable.\
-\
-- When the mobile is online, the application should cache the [menu data](/data/menu.json) in the mobile data store and periodically check for updates.
-\b0 \
 }

@@ -105,6 +105,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+
     return [[self.fetchedResultsController sections] count];
 }
 
@@ -115,6 +116,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+
     return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
 }
 
