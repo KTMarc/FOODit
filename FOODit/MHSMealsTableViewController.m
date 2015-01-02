@@ -128,7 +128,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
         
         __weak UITableViewCell *weakCell = cell;
+     
+        [mealImageView setImageWithURLRequest:requestImage placeholderImage:placeholderImage success:nil failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Unable to retrieve image");
+        }];
         
+        /*
         [mealImageView setImageWithURLRequest:requestImage
                              placeholderImage:placeholderImage
                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -141,6 +146,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
                                           [nm setPhoto:photo];
                                       }
                                       failure:nil];
+         */
     }
     
     //List of tags
@@ -156,6 +162,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             tagsLabel.text = [tagsLabel.text stringByAppendingString: [dict valueForKey:@"name"]];
             tagsLabel.text = [tagsLabel.text stringByAppendingString: @" "];
             //TO-DO: Draw all all tags which are not type:course
+            
         }
     }
         
