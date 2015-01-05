@@ -37,8 +37,8 @@
 		4975EB4F1A2BA5DB00F54354 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4975EB4E1A2BA5DB00F54354 /* Images.xcassets */; };
 		4975EB5E1A2BA5DB00F54354 /* FOODitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB5D1A2BA5DB00F54354 /* FOODitTests.m */; };
 		497BDBCB1A59B0F8003E9586 /* MHSorderStatusBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497BDBCA1A59B0F8003E9586 /* MHSorderStatusBarViewController.m */; };
+		497BDBCE1A5AFE62003E9586 /* MHSMealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497BDBCD1A5AFE62003E9586 /* MHSMealViewController.m */; };
 		49BDA8E41A3B03E800022C18 /* unnamed2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDA8E31A3B03E800022C18 /* unnamed2.jpg */; };
-		49BDA8E71A3B073500022C18 /* MHSOrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */; };
 		49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */; };
 		49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */; };
 		49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */; };
@@ -151,9 +151,9 @@
 		4975EB5D1A2BA5DB00F54354 /* FOODitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FOODitTests.m; sourceTree = "<group>"; };
 		497BDBC91A59B0F8003E9586 /* MHSorderStatusBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSorderStatusBarViewController.h; sourceTree = "<group>"; };
 		497BDBCA1A59B0F8003E9586 /* MHSorderStatusBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSorderStatusBarViewController.m; sourceTree = "<group>"; };
+		497BDBCC1A5AFE62003E9586 /* MHSMealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMealViewController.h; sourceTree = "<group>"; };
+		497BDBCD1A5AFE62003E9586 /* MHSMealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMealViewController.m; sourceTree = "<group>"; };
 		49BDA8E31A3B03E800022C18 /* unnamed2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed2.jpg; sourceTree = "<group>"; };
-		49BDA8E51A3B073500022C18 /* MHSOrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderTableViewController.h; sourceTree = "<group>"; };
-		49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderTableViewController.m; sourceTree = "<group>"; };
 		49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderViewController.h; sourceTree = "<group>"; };
 		49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderViewController.m; sourceTree = "<group>"; };
 		49BDA8EB1A3B648900022C18 /* MHSMyUITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMyUITableView.h; sourceTree = "<group>"; };
@@ -466,12 +466,12 @@
 				49E9FD0A1A37628100F9BF50 /* MHSCoreDataTableViewController.m */,
 				49BDA8EE1A3C667600022C18 /* MHSCoreDataViewController.h */,
 				49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */,
+				497BDBCD1A5AFE62003E9586 /* MHSMealViewController.m */,
+				497BDBCC1A5AFE62003E9586 /* MHSMealViewController.h */,
 				49BDA8F11A3C9BC600022C18 /* MHSMealsTableViewController.m */,
 				49BDA8F21A3C9BC600022C18 /* MHSMealsTableViewController.h */,
 				49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */,
 				49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */,
-				49BDA8E51A3B073500022C18 /* MHSOrderTableViewController.h */,
-				49BDA8E61A3B073500022C18 /* MHSOrderTableViewController.m */,
 				497BDBC91A59B0F8003E9586 /* MHSorderStatusBarViewController.h */,
 				497BDBCA1A59B0F8003E9586 /* MHSorderStatusBarViewController.m */,
 			);
@@ -660,11 +660,11 @@
 				4957BB931A3DF84E00892C45 /* AFURLResponseSerialization.m in Sources */,
 				49E9FD181A37AB8200F9BF50 /* Model.xcdatamodeld in Sources */,
 				4957BB991A3DF84E00892C45 /* UIImageView+AFNetworking.m in Sources */,
+				497BDBCE1A5AFE62003E9586 /* MHSMealViewController.m in Sources */,
 				4957BB9C1A3DF84E00892C45 /* UIWebView+AFNetworking.m in Sources */,
 				49C832B41A335B5200A73B0F /* _MHSOrder.m in Sources */,
 				49C832B21A335B5200A73B0F /* _MHSMeal.m in Sources */,
 				49C832B51A335B5200A73B0F /* _MHSTag.m in Sources */,
-				49BDA8E71A3B073500022C18 /* MHSOrderTableViewController.m in Sources */,
 				49E9FD071A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m in Sources */,
 				49C832BE1A335B5B00A73B0F /* MHSMeal.m in Sources */,
 				4957BB901A3DF84E00892C45 /* AFSecurityPolicy.m in Sources */,
