@@ -24,7 +24,7 @@
     _model = myAppDelegate.model;
     
     //KVO to listen to CORE DATA Changes
-   // [_order observeValueForKeyPath:@"bill" ofObject:(id) change:nil context:self.model.context];
+ //   [_order observeValueForKeyPath:@"bill" ofObject:(id) change:nil context:self.model.context];
     
     //NSLog(@"_order.bill:%@", _order.bill);
     //NSLog(@"_order.bill:%@", _order.bill);
