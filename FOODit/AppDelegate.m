@@ -19,7 +19,7 @@
 #import "NSDictionary+meal.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "UIImageView+AFNetworking.h"
-#include <CommonCrypto/CommonDigest.h>
+#import "MZFormSheetController.h"
 
 
 //static NSString * const BaseURLString = @"http://localhost:8888/";
@@ -31,22 +31,42 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    BOOL logs=NO;
     // Create the Core Data stack
     self.model = [MHSSimpleCoreDataStack coreDataStackWithModelName:@"Model"];
    
-    //Create the only Order this application will support. But It is prepared to receive more orders in the future
-    //if they are needed. That way the user can see his last orders.
-    _order = [MHSOrder orderWithcontext:self.model.context];
+    //Data was already downloaded?
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *hasData = [defaults objectForKey:@"hasData"];
     
-    
+    if ([hasData isEqualToString:@"yes"]){
+        //Create the only Order this application will support. But It is prepared to receive more orders in the future
+        //if they are needed. That way the user can see his last orders.
+        if (logs){NSLog(@"Data was already there");}
+            NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSOrder entityName]];
+            NSError *error = nil;
+            NSArray *results = [self.model.context executeFetchRequest:req
+                                                                 error:&error];
+            if (results == nil) {
+                NSLog(@"Error fetching: %@", results);
+            }else{
+                //Not valid for future support for more than one order
+                if (logs){NSLog(@"[results count]: %lu",(unsigned long)[results count]);}
+                if ([results count]>0){
+                    _order = results[0];
+                   if (logs){ NSLog(@"LAst time Bill was: %@", _order.bill);}
+                }
+            }
+    }else{
+        if (logs){NSLog(@"We don't have any data, we load everything from the network");}
+        [self loadRemoteData];
+        //Create the Order record
+        _order = [MHSOrder orderWithcontext:self.model.context];
+
+    }
+
     [self autoSave];
-    
-    //[self loadLocalData];
-    
-    [self loadRemoteData];
-    
     return YES;
-    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -78,6 +98,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [self save];
+    //[self.model zapAllData];
     
     NSLog(@"Bye...");
 }
@@ -136,6 +157,12 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     }];
     
     [operation start];
+    
+    //Set the flag for loaded Data
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"yes" forKey:@"hasData"];
+    [defaults synchronize];
+    
 }
 
 
@@ -158,9 +185,15 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
         //NSLog(@"Array of Tags %@", arrayTags);
         
         isMainCourse = [self tagProcessWith:arrayTags fromMeal:actualMeal logs:logs];
-        [actualMeal setMainCourseValue: isMainCourse];
-        
+        if (isMainCourse){
+            if (logs){NSLog(@"We have a main");}
+            [actualMeal setMainCourse:@"main"];
+        }else{
+            if (logs){NSLog(@"We have an other");}
+            [actualMeal setMainCourse:@"other"];
+        }
     } //meals iteration
+    
 }
 
 
@@ -179,12 +212,13 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
         if ([tagPointer hasPrefix:@"#"]){
             aux = [[tagPointer substringFromIndex:1] componentsSeparatedByString: @":"];
             [sortedArrayTags addObject: aux[1]];
-            if ([tagPointer containsString:@"Main"]) {
-                NSLog(@"it is a Main Course");
+            if ([tagPointer containsString:@"main"]) {
+              //  NSLog(@"it is a Main Course");
                 isMainCourse=YES;
             }
-            //NSLog(@"Name = %@", aux[1]);
             //NSLog(@"Type = %@", aux[0]);
+            //NSLog(@"Name = %@", aux[1]);
+
         } else{
             [sortedArrayTags addObject: tagPointer];
             //NSLog(@"Name = %@", [sortedArrayTags lastObject]);
@@ -244,7 +278,6 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
         } //End of actual Meal tags iteration
         if (logs){NSLog(@"\n\n");}
     }
-    //http://www.raywenderlich.com/59255/afnetworking-2-0-tutorial
     
     [sortedArrayTags removeAllObjects];
 
@@ -316,43 +349,6 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
        
     
-    /*
-     //List of meals
-     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
-     ascending:NO]];
-     
-     
-     //List of tags for a specific Meal mealID = @"cad2d2e8b16eb668f47b4f2827438951"
-     
-     
-     req = [NSFetchRequest fetchRequestWithEntityName:[MHSTag entityName]];
-     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTagAttributes.type
-     
-     [MHSMealRelationships ]
-     ascending:NO]];
-     
-     req.predicate = [NSPredicate predicateWithFormat:@"ANY meal = %@",[......];
-     */
-    
-    //All tags for each meal
-//    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMeal entityName]];
-//    /*req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealAttributes.mealID
-//     ascending:NO]];
-//     */
-//    NSError *error = nil;
-//    NSArray *results = [self.model.context executeFetchRequest:req
-//                                                         error:&error];
-//
-//    if (results == nil) {
-//        NSLog(@"Error fetching: %@", results);
-//    }else{
-//        //    NSLog(@"Results: %@", results);
-//        
-//        for (MHSMeal* meal in results) {
-//            NSLog(@"%@:%@", [meal valueForKeyPath:@"tags.tagType"], [meal valueForKeyPath:@"tags.name"]);
-//        }
-//    }
 }
 
 

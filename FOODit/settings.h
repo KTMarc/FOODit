@@ -6,5 +6,5 @@
 //
 //
 
-#define AUTO_SAVE NO
-#define AUTO_SAVE_DELAY_IN_SECONDS 5
+#define AUTO_SAVE YES
+#define AUTO_SAVE_DELAY_IN_SECONDS 15

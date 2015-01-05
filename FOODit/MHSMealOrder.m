@@ -12,7 +12,7 @@
                       note_for_kitchen:(NSString *)note
                                   meal: (MHSMeal *)meal
                                  order: (MHSOrder *)order
-                            mainCourse: (BOOL) mainCourse
+                            mainCourse: (NSString *) mainCourse
                                context:(NSManagedObjectContext *) context{
     
     MHSMealOrder *nmo = [NSEntityDescription insertNewObjectForEntityForName:[MHSMealOrder entityName]
@@ -22,11 +22,8 @@
     nmo.note_for_kitchen = note;
     nmo.meal = meal;
     nmo.order = order;
-    if (mainCourse){
-        nmo.mainCourse = @"Mains";
-    }else {
-        nmo.mainCourse = @"Other";
-    }
+    nmo.mainCourse = mainCourse;
+
     
     return nmo;
 }

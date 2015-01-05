@@ -44,11 +44,6 @@ const struct MHSMealRelationships MHSMealRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"mainCourseValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"mainCourse"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
 	if ([key isEqualToString:@"priceValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"price"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -61,24 +56,6 @@ const struct MHSMealRelationships MHSMealRelationships = {
 @dynamic desc;
 
 @dynamic mainCourse;
-
-- (BOOL)mainCourseValue {
-	NSNumber *result = [self mainCourse];
-	return [result boolValue];
-}
-
-- (void)setMainCourseValue:(BOOL)value_ {
-	[self setMainCourse:@(value_)];
-}
-
-- (BOOL)primitiveMainCourseValue {
-	NSNumber *result = [self primitiveMainCourse];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveMainCourseValue:(BOOL)value_ {
-	[self setPrimitiveMainCourse:@(value_)];
-}
 
 @dynamic mealID;
 

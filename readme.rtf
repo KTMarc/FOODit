@@ -23,27 +23,26 @@ To add a Meal, touch any part of the cell except the button. To see the Order, t
 \
 To test the app, better to do it in a real device. Once launched the first time, close the app and open it again right form the device, not from Xcode. That way you can see how persistance works. Each time you open it, will have two more meals (because they are hard coded).\
 \
-CORE DATA Autosave option is disabled for testing.\
-To enable it: \
-change the first line in \'93Supporting files > settings.h\'94\
+CORE DATA Autosave option is enabled.\
+\
+Can be changed in \'93Supporting files > settings.h\'94\
 
 \b 	#define AUTO_SAVE YES
 \b0 \
-\
 
 \b \
 Missing Features:
 \b0 \
 \
 - When the mobile is online, the application should cache the [menu data](/data/menu.json) in the mobile data store and periodically check for updates \'97\'97> 
-\b How to detect the update? there is no timestamp to check if there\'92s something new? We should check and compare field by field if there is any difference from the last JSON.
+\b How to detect the update? there is no timestamp to check if there\'92s something new? Is the ID of each meal going to change when there is some update on the server side. Otherwise we should check and compare field by field if there is any difference from the last JSON.
 \b0 \
 \
 \
 
 \b in List of Meals ViewController:
 \b0 \
-\'b7Tag icons are not displayed graphically, but they are listed from the Database.\
+\'b7Tag icons are not displayed graphically, but they are listed from the Database. \
 \
 \'b73 dots to expand the description. This should be easy.\
 \
@@ -53,6 +52,15 @@ Missing Features:
 \b in List of Orders ViewController:
 \b0 \
 \'b7Swipe from top to display this viewController\
-\'b7Section headers.\
+\
+\
+
+\b Links:
+\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+{\field{\*\fldinst{HYPERLINK "https://github.com/FOODit/FOODit-MobileTest"}}{\fldrslt \cf0 https://github.com/FOODit/FOODit-MobileTest}}\
+\
+{\field{\*\fldinst{HYPERLINK "https://github.com/KTMarc/FOODit"}}{\fldrslt https://github.com/KTMarc/FOODit}}\
+\
 \
 }

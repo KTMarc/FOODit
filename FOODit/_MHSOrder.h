@@ -5,6 +5,8 @@
 
 extern const struct MHSOrderAttributes {
 	__unsafe_unretained NSString *bill;
+	__unsafe_unretained NSString *main;
+	__unsafe_unretained NSString *other;
 } MHSOrderAttributes;
 
 extern const struct MHSOrderRelationships {
@@ -30,6 +32,22 @@ extern const struct MHSOrderRelationships {
 
 //- (BOOL)validateBill:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSNumber* main;
+
+@property (atomic) int16_t mainValue;
+- (int16_t)mainValue;
+- (void)setMainValue:(int16_t)value_;
+
+//- (BOOL)validateMain:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* other;
+
+@property (atomic) int16_t otherValue;
+- (int16_t)otherValue;
+- (void)setOtherValue:(int16_t)value_;
+
+//- (BOOL)validateOther:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSSet *mealOrders;
 
 - (NSMutableSet*)mealOrdersSet;
@@ -51,6 +69,18 @@ extern const struct MHSOrderRelationships {
 
 - (float)primitiveBillValue;
 - (void)setPrimitiveBillValue:(float)value_;
+
+- (NSNumber*)primitiveMain;
+- (void)setPrimitiveMain:(NSNumber*)value;
+
+- (int16_t)primitiveMainValue;
+- (void)setPrimitiveMainValue:(int16_t)value_;
+
+- (NSNumber*)primitiveOther;
+- (void)setPrimitiveOther:(NSNumber*)value;
+
+- (int16_t)primitiveOtherValue;
+- (void)setPrimitiveOtherValue:(int16_t)value_;
 
 - (NSMutableSet*)primitiveMealOrders;
 - (void)setPrimitiveMealOrders:(NSMutableSet*)value;

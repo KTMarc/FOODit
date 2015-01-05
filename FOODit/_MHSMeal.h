@@ -35,11 +35,7 @@ extern const struct MHSMealRelationships {
 
 //- (BOOL)validateDesc:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSNumber* mainCourse;
-
-@property (atomic) BOOL mainCourseValue;
-- (BOOL)mainCourseValue;
-- (void)setMainCourseValue:(BOOL)value_;
+@property (nonatomic, strong) NSString* mainCourse;
 
 //- (BOOL)validateMainCourse:(id*)value_ error:(NSError**)error_;
 
@@ -98,11 +94,8 @@ extern const struct MHSMealRelationships {
 - (NSString*)primitiveDesc;
 - (void)setPrimitiveDesc:(NSString*)value;
 
-- (NSNumber*)primitiveMainCourse;
-- (void)setPrimitiveMainCourse:(NSNumber*)value;
-
-- (BOOL)primitiveMainCourseValue;
-- (void)setPrimitiveMainCourseValue:(BOOL)value_;
+- (NSString*)primitiveMainCourse;
+- (void)setPrimitiveMainCourse:(NSString*)value;
 
 - (NSString*)primitiveMealID;
 - (void)setPrimitiveMealID:(NSString*)value;

@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
    }
 
 - (void)didReceiveMemoryWarning {
@@ -47,9 +46,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    self.title = @"Orders";
+   // self.title = @"Orders";
     
-    //We access the model we created in the app delegate
+    //Access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
     _order = myAppDelegate.order;
     
@@ -57,11 +56,10 @@
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSMealOrder entityName]];
     req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: MHSMealOrderAttributes.mainCourse
                                                           ascending:YES]];
-//    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSMealOrderAttributes.note_for_kitchen
-//                                                          ascending:NO]];
+
     NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
                                                                               managedObjectContext:myAppDelegate.model.context
-                                                                                sectionNameKeyPath:nil
+                                                                                sectionNameKeyPath: MHSMealOrderAttributes.mainCourse
                                                                                          cacheName:nil];
     self.fetchedResultsController = results;
     [self updateBill];
@@ -109,6 +107,8 @@
 -(void) updateBill {
 
     _order.bill = @0.0;
+    _order.main = @0.0;
+    _order.other = @0.0;
     NSArray *results = [self.fetchedResultsController fetchedObjects];
   
     if (results == nil) {
@@ -116,6 +116,11 @@
     }else{
         for (MHSMealOrder *mo in results) {
             _order.bill = @((_order.bill.floatValue +  (mo.meal_count.intValue) * (mo.meal.price.floatValue)));
+            if ([mo.meal.mainCourse isEqualToString:@"main"]){ //Update data consumed by MHSorderStatusBarViewController
+                _order.main = @(_order.main.longLongValue + 1);
+            }else{
+                _order.other = @(_order.main.longLongValue + 1);
+            }
         }
         _totalPriceLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
     }
@@ -127,7 +132,6 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     MHSMealOrder *mo = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
@@ -161,12 +165,20 @@
               action:@selector(decreaseMeal:)
     forControlEvents:UIControlEventTouchUpInside];
     [self updateBill];
+    
     return cell;
 }
 
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+    NSString *titleName = [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+
+    if ([[[self.fetchedResultsController sections] objectAtIndex:section] numberOfObjects] > 1){
+        titleName = [titleName stringByAppendingString: @"s" ];
+    }
+    
+    return   titleName = [titleName capitalizedString];
 }
 
 

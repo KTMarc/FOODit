@@ -13,6 +13,8 @@
 #import "MHSTag.h"
 #import "MHSTagDraw.h"
 #import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
+#import "PocketSVG.h"
 
 @interface MHSMealsTableViewController ()
 
@@ -73,7 +75,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     //Add the meal to MealsOrders
-    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order mainCourse: currentMeal.mainCourseValue context:self.model.context];
+    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order mainCourse: currentMeal.mainCourse context:self.model.context];
     
     _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [currentMeal.price floatValue])];
     
@@ -86,6 +88,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 -(UITableViewCell *) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    BOOL logs = NO;
     
     // Get the meal
     MHSMeal *nm = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -108,32 +112,33 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     priceLabel.text = [NSString stringWithFormat: @"£"];
     priceLabel.text = [priceLabel.text stringByAppendingString:[nm.price stringValue]];
   
-    
     UIImageView *mealImageView = (UIImageView*)[cell viewWithTag:13];
    
-    
-    if ([nm imageDb] != nil){ //Reading from CORE DATA
+      if ([nm imageDb] != nil){ //Reading from CORE DATA
 
-      //  NSLog(@"Image found on CORE DATA");
+        NSLog(@"Image found on CORE DATA");
         mealImageView.image = [nm imageDb];
+        if (logs) {NSLog(@"[nm imageDb] when reading from Core Data: %@",[nm imageDb]);}
         
-    } else{   //Read remotely async with AFNetworking
+    } else {   //Read remotely async with AFNetworking
     
-       // NSLog(@"NO image inside meal. Loading from remote location");
+        if (logs) {NSLog(@"[nm imageDb] when loading remotely: %@",[nm imageDb]);}
+        if (logs) {NSLog(@"NO image inside meal. Loading from remote location");}
         NSURL *urlImage = [NSURL URLWithString:[nm primaryImageUrl]];
         
-        //NSLog(@"URL: %@", [nm primaryImageUrl]);
+        if (logs) {NSLog(@"URL: %@", [nm primaryImageUrl]);}
         
         NSURLRequest *requestImage = [NSURLRequest requestWithURL:urlImage];
         UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
         
-        __weak UITableViewCell *weakCell = cell;
-     
         [mealImageView setImageWithURLRequest:requestImage placeholderImage:placeholderImage success:nil failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
             NSLog(@"Unable to retrieve image");
         }];
         
-        /*
+       /*
+        //This solution also works but loads two images in the same cell when there is no data yet in CORE DATA.
+        __weak UITableViewCell *weakCell = cell;
+        
         [mealImageView setImageWithURLRequest:requestImage
                              placeholderImage:placeholderImage
                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -146,7 +151,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
                                           [nm setPhoto:photo];
                                       }
                                       failure:nil];
-         */
+        */
     }
     
     //List of tags
@@ -154,18 +159,36 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     NSArray *sortedItems = [arrayDict sortedArrayUsingDescriptors:@[[NSSortDescriptor
                                                                      sortDescriptorWithKey:@"tagType" ascending:YES]]];
-    //NSLog(@"Tags from this meal:");
     UILabel *tagsLabel = (UILabel*) [cell viewWithTag:14];
     for (NSDictionary* dict in sortedItems) {
         if (![[dict valueForKey:@"name"] containsString:@"Main"]){
-            //NSLog(@"%@",[dict valueForKey:@"name"]);
+           
+            
             tagsLabel.text = [tagsLabel.text stringByAppendingString: [dict valueForKey:@"name"]];
             tagsLabel.text = [tagsLabel.text stringByAppendingString: @" "];
-            //TO-DO: Draw all all tags which are not type:course
+            
+            
+            /*
+            // Draw all SVG tags which are not type:course
+            //1: Turn your SVG into a CGPath:
+            CGPathRef myPath = [PocketSVG pathFromSVGFileNamed:@"expand-button"];
+            
+            //2: To display it on screen, you can create a CAShapeLayer
+            //and set myPath as its path property:
+            CAShapeLayer *myShapeLayer = [CAShapeLayer layer];
+            myShapeLayer.path = myPath;
+            
+            //3: Fiddle with it using CAShapeLayer's properties:
+            myShapeLayer.strokeColor = [[UIColor redColor] CGColor];
+            myShapeLayer.lineWidth = 4;
+            myShapeLayer.fillColor = [[UIColor clearColor] CGColor];
+            
+            //4: Display it!
+            [self.view.layer addSublayer:myShapeLayer];
+             */
             
         }
     }
-        
     return cell;
 }
 

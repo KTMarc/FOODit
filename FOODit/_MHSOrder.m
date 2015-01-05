@@ -5,6 +5,8 @@
 
 const struct MHSOrderAttributes MHSOrderAttributes = {
 	.bill = @"bill",
+	.main = @"main",
+	.other = @"other",
 };
 
 const struct MHSOrderRelationships MHSOrderRelationships = {
@@ -42,6 +44,16 @@ const struct MHSOrderRelationships MHSOrderRelationships = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"mainValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"main"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"otherValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"other"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -64,6 +76,46 @@ const struct MHSOrderRelationships MHSOrderRelationships = {
 
 - (void)setPrimitiveBillValue:(float)value_ {
 	[self setPrimitiveBill:@(value_)];
+}
+
+@dynamic main;
+
+- (int16_t)mainValue {
+	NSNumber *result = [self main];
+	return [result shortValue];
+}
+
+- (void)setMainValue:(int16_t)value_ {
+	[self setMain:@(value_)];
+}
+
+- (int16_t)primitiveMainValue {
+	NSNumber *result = [self primitiveMain];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveMainValue:(int16_t)value_ {
+	[self setPrimitiveMain:@(value_)];
+}
+
+@dynamic other;
+
+- (int16_t)otherValue {
+	NSNumber *result = [self other];
+	return [result shortValue];
+}
+
+- (void)setOtherValue:(int16_t)value_ {
+	[self setOther:@(value_)];
+}
+
+- (int16_t)primitiveOtherValue {
+	NSNumber *result = [self primitiveOther];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveOtherValue:(int16_t)value_ {
+	[self setPrimitiveOther:@(value_)];
 }
 
 @dynamic mealOrders;
