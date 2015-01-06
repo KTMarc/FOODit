@@ -77,7 +77,7 @@
     self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
     self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
     self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
-    NSLog(@"Value changed");
+    //NSLog(@"Value changed");
 }
 
 -(void) didTap:(UITapGestureRecognizer *) tap{
