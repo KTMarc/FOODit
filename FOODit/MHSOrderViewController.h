@@ -19,6 +19,7 @@
 @property (strong, nonatomic) MHSSimpleCoreDataStack *model;
 @property (strong, nonatomic) MHSMeal *selectedMeal;
 @property (strong, nonatomic) MHSOrder *order;
+- (IBAction)dismissButton:(id)sender;
 
 
 //IB OUTLETS

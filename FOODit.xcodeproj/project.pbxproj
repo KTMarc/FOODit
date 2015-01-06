@@ -73,6 +73,7 @@
 		49C832C81A33614500A73B0F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C832C71A33614500A73B0F /* MobileCoreServices.framework */; };
 		49C832CA1A33614F00A73B0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C832C91A33614F00A73B0F /* Security.framework */; };
 		49C832CC1A33615700A73B0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C832CB1A33615700A73B0F /* SystemConfiguration.framework */; };
+		49E47DAE1A5C068B00E7541A /* MHSDismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E47DAD1A5C068B00E7541A /* MHSDismissSegue.m */; };
 		49E9FD071A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E9FD061A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m */; };
 		49E9FD0B1A37628100F9BF50 /* MHSCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E9FD0A1A37628100F9BF50 /* MHSCoreDataTableViewController.m */; };
 		49E9FD181A37AB8200F9BF50 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E9FD161A37AB8200F9BF50 /* Model.xcdatamodeld */; };
@@ -202,6 +203,8 @@
 		49C832CB1A33615700A73B0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		49C832CE1A33622200A73B0F /* FOODit_Pefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FOODit_Pefix.pch; sourceTree = "<group>"; };
 		49C832FC1A3364A000A73B0F /* menu.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = menu.json; sourceTree = "<group>"; };
+		49E47DAC1A5C068B00E7541A /* MHSDismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSDismissSegue.h; sourceTree = "<group>"; };
+		49E47DAD1A5C068B00E7541A /* MHSDismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSDismissSegue.m; sourceTree = "<group>"; };
 		49E9FD051A375BFE00F9BF50 /* MHSSimpleCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSSimpleCoreDataStack.h; sourceTree = "<group>"; };
 		49E9FD061A375BFE00F9BF50 /* MHSSimpleCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSSimpleCoreDataStack.m; sourceTree = "<group>"; };
 		49E9FD081A375FDD00F9BF50 /* settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
@@ -469,6 +472,8 @@
 				49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */,
 				497BDBC91A59B0F8003E9586 /* MHSorderStatusBarViewController.h */,
 				497BDBCA1A59B0F8003E9586 /* MHSorderStatusBarViewController.m */,
+				49E47DAC1A5C068B00E7541A /* MHSDismissSegue.h */,
+				49E47DAD1A5C068B00E7541A /* MHSDismissSegue.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -665,6 +670,7 @@
 				4957BB901A3DF84E00892C45 /* AFSecurityPolicy.m in Sources */,
 				4957BB941A3DF84E00892C45 /* AFURLSessionManager.m in Sources */,
 				49307A201A3A3F12005B0937 /* MHSPhoto.m in Sources */,
+				49E47DAE1A5C068B00E7541A /* MHSDismissSegue.m in Sources */,
 				4957BB981A3DF84E00892C45 /* UIButton+AFNetworking.m in Sources */,
 				49307A1F1A3A3F12005B0937 /* _MHSPhoto.m in Sources */,
 				4957BB8E1A3DF84E00892C45 /* AFHTTPSessionManager.m in Sources */,

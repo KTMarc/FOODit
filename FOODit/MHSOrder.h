@@ -5,5 +5,6 @@
 
 +(instancetype) orderWithcontext:(NSManagedObjectContext *)context;
 
+-(void) SetupKVO;
 
 @end

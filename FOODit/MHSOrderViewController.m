@@ -126,6 +126,11 @@
     }
 }
 
+- (IBAction)dismissButton:(id)sender {
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - Data Source
 
@@ -216,6 +221,6 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
  }
  */
 
+
+
 @end
-
-

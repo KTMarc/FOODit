@@ -43,7 +43,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-   // self.title = @"Your Delicious Restaurant";
+    
+    
     
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
@@ -60,6 +61,8 @@
                                                                                          cacheName:nil];
     self.fetchedResultsController = results;
     
+    
+    
 }
 
 
@@ -70,30 +73,40 @@
     [center removeObserver:self];
 }
 
-#pragma mark - Actions
 
-
-#pragma mark - Delegate
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    
-    //check if the user selected the whole cell or just the button.
+- (void)orderMeal:(id)sender
+{
+    //Get the superview from this button which will be our cell
+    UITableViewCell *clickedCell = (UITableViewCell *)[sender superview] ;
+    //From the cell get its index path.
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:clickedCell];
+    //NSLog(@"Indexpath en OrderMeal: %@", indexPath);
     
     // Get the meal
     MHSMeal *currentMeal = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
     
     //Add the meal to MealsOrders
     [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order mainCourse: currentMeal.mainCourse context:self.model.context];
     
     _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [currentMeal.price floatValue])];
-    
-    //NSLog(@"Current bill: %@", _order.bill);
-    
+/*
+    if ([currentMeal.mainCourse isEqualToString:@"main"]){ //Update data consumed by MHSorderStatusBarViewController
+        _order.main = @(_order.main.longLongValue + 1);
+    }else{
+        _order.other = @(_order.main.longLongValue + 1);
+    }*/
+
 }
 
+
+#pragma mark - Delegate
+/*
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //check if the user selected the whole cell or just the button.
+}
+*/
 
 #pragma mark - Data Source
 
@@ -146,6 +159,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             NSLog(@"Unable to retrieve image");
         }];
         
+        
         /*
          //This solution also works but loads two images in the same cell when there is no data yet in CORE DATA.
          __weak UITableViewCell *weakCell = cell;
@@ -172,9 +186,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
                                                                      sortDescriptorWithKey:@"tagType" ascending:YES]]];
     UILabel *tagsLabel = (UILabel*) [cell viewWithTag:14];
     for (NSDictionary* dict in sortedItems) {
-        if (![[dict valueForKey:@"name"] containsString:@"Main"]){
-            
-            
+        if (![[dict valueForKey:@"name"] containsString:@"main"]){
             tagsLabel.text = [tagsLabel.text stringByAppendingString: [dict valueForKey:@"name"]];
             tagsLabel.text = [tagsLabel.text stringByAppendingString: @" "];
             
@@ -200,8 +212,22 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
             
         }
     }
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button addTarget:self
+               action:@selector(orderMeal:)
+     forControlEvents:UIControlEventTouchDown];
+    [button setTitle:@"Add to my Order" forState:UIControlStateNormal];
+    [button setTintColor: [UIColor whiteColor]];
+     [button setBackgroundColor:[UIColor colorWithRed:0.0/255 green:128.0/255 blue:255.0/255 alpha:1.0]];
+    button.frame = CGRectMake(40.0f, 274.0f, 239.0f, 30.0f);
+    [button.titleLabel  setFont:[UIFont fontWithName:@"Avenir-Next-Italic" size:17.0]];
+    [cell addSubview:button];
+    
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView
 estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
