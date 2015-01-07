@@ -19,14 +19,24 @@ JSON mapping to CORE DATA is done with AFNetworking. \
 The download of all pictures is done in the background async (not blocking)\
 I set the server address in my appDelegate, after the #imports\
 \
-To test the app, better to do it in a real device. Once launched the first time, close the app and open it again right form the device, not from Xcode. That way you can see how persistance works. Each time you open it, will have two more meals (because they are hard coded).\
 \
-CORE DATA Autosave option is enabled.\
-\
-Can be changed in \'93Supporting files > settings.h\'94\
+CORE DATA Autosave option is enabled. Can be changed in:\
+ \'93Supporting files > settings.h\'94\
 
-\b 	#define AUTO_SAVE YES
+\b 	#define AUTO_SAVE YES\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b0 \cf0 \
+The application will load from the network the JSON once, and then will store a flag so the next execution will load data from core data. \
+To make it load again:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 1-from the network from the simulator menu \'93iOS Simulator -> Reset content and settings..\'94
 \b0 \
+
+\b 2-from the device, delete the app
+\b0 \
+\
 
 \b \
 Missing Features:
@@ -42,10 +52,9 @@ Missing Features:
 \b0 \
 \'b7Tag icons are not displayed graphically, but they are listed from the Database. \
 \
-\'b73 dots to expand the description. This should be easy.\
+\'b73 dots to expand the description.\
 \
 \'b7Alert View displaying the number of meals the user wants to order and the "Notes for the kitchen". I forced all new added meals to the order were one unit and "No chilli" was the note. This was not on the screenshots, but I would add it.\
-\
 \
 
 \b Links:
@@ -53,7 +62,8 @@ Missing Features:
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 {\field{\*\fldinst{HYPERLINK "https://github.com/FOODit/FOODit-MobileTest"}}{\fldrslt \cf0 https://github.com/FOODit/FOODit-MobileTest}}\
 \
-{\field{\*\fldinst{HYPERLINK "https://github.com/KTMarc/FOODit"}}{\fldrslt https://github.com/KTMarc/FOODit}}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+{\field{\*\fldinst{HYPERLINK "https://github.com/KTMarc/FOODit"}}{\fldrslt \cf0 https://github.com/KTMarc/FOODit}}\
 \
 \
 }

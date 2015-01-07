@@ -4,16 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-MZAppearance.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-MZFormSheetController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-PocketSVG.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>61B909F59179FC381FB72CD1</key>
+		<key>3B02EAA90905275341BFE785</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>62F37DB07164AF30593AE028</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6CAB96A9360C2493AEAA0C6C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>81EDFE1AB9F19F7E9FAE2900</key>
+		<key>C776BEF845E238012E5E9211</key>
 		<dict>
 			<key>primary</key>
 			<true/>

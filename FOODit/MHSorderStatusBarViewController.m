@@ -17,6 +17,8 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.resetButton.hidden = true;
+
         if (_order.billValue == 0){
             self.welcomeLabel.hidden = false;
             self.mainCountLabel.hidden = true;
@@ -27,6 +29,7 @@
     self.mainCountLabel.hidden = false;
     self.otherCountLabel.hidden = false;
     self.billTotalLabel.hidden = false;
+//    self.resetButton.hidden = false;
     
     self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
     self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
@@ -97,26 +100,28 @@
                       context:(void *)context{
     
    // NSLog(@"Detected change in Model. \n Keypath: %@\n object:%@\n change:%@", keyPath,object,change);
+    BOOL logs = NO;
     if (_order.billValue > 0){
         self.welcomeLabel.hidden = true;
         self.mainCountLabel.hidden = false;
         self.otherCountLabel.hidden = false;
         self.billTotalLabel.hidden = false;
+       // self.resetButton.hidden = false;
     }
     
     if ([keyPath isEqualToString:@"main"]){
         self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
-            NSLog(@"Detected change in Main");
-                NSLog(@"New value for: %@",self.mainCountLabel.text );
+        if (logs){ NSLog(@"Detected change in Main");
+            NSLog(@"New value for: %@",self.mainCountLabel.text );}
     }
     if ([keyPath isEqualToString:@"other"]){
         self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
-            NSLog(@"Detected change in Other");
-                NSLog(@"New value for: %@",self.otherCountLabel.text );
+            if (logs){NSLog(@"Detected change in Other");
+                NSLog(@"New value for: %@",self.otherCountLabel.text );}
     }
     if ([keyPath isEqualToString:@"bill"]){
         self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
-        NSLog(@"Detected change in Bill");
+        if (logs){NSLog(@"Detected change in Bill");}
 
     }
     
@@ -134,4 +139,14 @@
 }
 
 
+- (IBAction)resetButton:(id)sender {
+
+    //Delete Database
+    [_model zapAllData];
+    //Set the flag for loaded Data
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"no" forKey:@"hasData"];
+    [defaults synchronize];
+    
+}
 @end

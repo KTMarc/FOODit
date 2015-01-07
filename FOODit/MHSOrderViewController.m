@@ -46,7 +46,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-   // self.title = @"Orders";
+    [self updateBill];
     
     //Access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
@@ -112,7 +112,7 @@
     NSArray *results = [self.fetchedResultsController fetchedObjects];
   
     if (results == nil) {
-        NSLog(@"Error fetching: %@", results);
+        //NSLog(@"Error fetching: %@", results);
     }else{
         for (MHSMealOrder *mo in results) {
             _order.bill = @((_order.bill.floatValue +  (mo.meal_count.intValue) * (mo.meal.price.floatValue)));

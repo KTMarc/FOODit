@@ -126,9 +126,6 @@
     if (self = [super init]) {
         self.modelURL = [[NSBundle mainBundle] URLForResource:aModelName withExtension:@"momd"];
         self.dbURL = aDBURL;
-        
-
-
     }
     
     return self;

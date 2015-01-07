@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *welcomeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *mainCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *otherCountLabel;
+- (IBAction)resetButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *resetButton;
 
 
 @end

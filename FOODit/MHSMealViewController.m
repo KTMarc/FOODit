@@ -68,6 +68,7 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self];
+    
 }
 
 
@@ -182,6 +183,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *sortedItems = [arrayDict sortedArrayUsingDescriptors:@[[NSSortDescriptor
                                                                      sortDescriptorWithKey:@"tagType" ascending:YES]]];
     UILabel *tagsLabel = (UILabel*) [cell viewWithTag:14];
+    tagsLabel.text = @"";
     for (NSDictionary* dict in sortedItems) {
         if (![[dict valueForKey:@"name"] containsString:@"main"]){
             tagsLabel.text = [tagsLabel.text stringByAppendingString: [dict valueForKey:@"name"]];

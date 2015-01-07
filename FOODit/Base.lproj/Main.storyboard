@@ -9,8 +9,8 @@
             <objects>
                 <viewController id="6ez-do-qkW" customClass="MHSMealViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="b8G-t7-nr6"/>
-                        <viewControllerLayoutGuide type="bottom" id="QUC-IW-z5c"/>
+                        <viewControllerLayoutGuide type="top" id="9eR-T4-tRG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ki0-Xg-ouF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yY5-Ie-o8t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -110,8 +110,8 @@
             <objects>
                 <viewController storyboardIdentifier="order" id="2ig-Vr-oqi" customClass="MHSOrderViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6fZ-Lq-NNk"/>
-                        <viewControllerLayoutGuide type="bottom" id="3cU-S6-klC"/>
+                        <viewControllerLayoutGuide type="top" id="tJI-V7-5h5"/>
+                        <viewControllerLayoutGuide type="bottom" id="dBD-Ro-Dp8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0p3-vb-yas">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -226,15 +226,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cbv-d7-cSn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3139" y="323"/>
+            <point key="canvasLocation" x="3028" y="330"/>
         </scene>
         <!--Sorder Status Bar View Controller-->
         <scene sceneID="0Ga-sg-iEO">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Hig-ig-IVg" customClass="MHSorderStatusBarViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pAj-dV-ZXT"/>
-                        <viewControllerLayoutGuide type="bottom" id="aJd-g2-Ts2"/>
+                        <viewControllerLayoutGuide type="top" id="4s9-e1-Eqm"/>
+                        <viewControllerLayoutGuide type="bottom" id="EjP-6L-Gij"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BEO-nO-s2p">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -268,6 +268,15 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYt-Yl-AK4">
+                                <rect key="frame" x="180" y="24" width="40" height="30"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButton:" destination="Hig-ig-IVg" eventType="touchUpInside" id="B2C-ga-faS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.7843137255" green="0.23529411759999999" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -276,6 +285,7 @@
                         <outlet property="billTotalLabel" destination="aeh-e5-T7H" id="lMD-4I-QBe"/>
                         <outlet property="mainCountLabel" destination="bJq-Kp-kD3" id="sr1-nR-BkD"/>
                         <outlet property="otherCountLabel" destination="Eh7-sw-lRf" id="v1K-jz-jD4"/>
+                        <outlet property="resetButton" destination="TYt-Yl-AK4" id="720-Lc-ywb"/>
                         <outlet property="welcomeLabel" destination="sf0-wX-H2G" id="UEk-lF-UQH"/>
                         <segue destination="2ig-Vr-oqi" kind="modal" identifier="toOrderSegue" id="rK4-hd-Tku"/>
                     </connections>
