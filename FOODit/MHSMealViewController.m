@@ -43,9 +43,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
-    
-    
     //We access the model we created in the app delegate
     AppDelegate *myAppDelegate = [UIApplication sharedApplication].delegate;
     _model = myAppDelegate.model;
@@ -89,12 +86,12 @@
     [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order mainCourse: currentMeal.mainCourse context:self.model.context];
     
     _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [currentMeal.price floatValue])];
-/*
+
     if ([currentMeal.mainCourse isEqualToString:@"main"]){ //Update data consumed by MHSorderStatusBarViewController
         _order.main = @(_order.main.longLongValue + 1);
     }else{
         _order.other = @(_order.main.longLongValue + 1);
-    }*/
+    }
 
 }
 

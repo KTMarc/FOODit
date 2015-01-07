@@ -14,6 +14,27 @@
 
 @implementation MHSorderStatusBarViewController
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+        if (_order.billValue == 0){
+            self.welcomeLabel.hidden = false;
+            self.mainCountLabel.hidden = true;
+            self.otherCountLabel.hidden = true;
+            self.billTotalLabel.hidden = true;
+        } else{
+    self.welcomeLabel.hidden = true;
+    self.mainCountLabel.hidden = false;
+    self.otherCountLabel.hidden = false;
+    self.billTotalLabel.hidden = false;
+    
+    self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
+    self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
+    self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
+     }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -24,6 +45,8 @@
     _model = myAppDelegate.model;
     
     //SetupKVO to listen to CORE DATA Changes
+   // [_order setupKVO];
+    
     NSArray *keys= @[@"bill",@"main",@"other"];
     
     for (NSString *key in keys) {
@@ -33,22 +56,6 @@
                   options: NSKeyValueObservingOptionNew
                   context:NULL];
     }
-    
-//    if (_order.billValue == 0){
-//        self.welcomeLabel.hidden = false;
-//        self.mainCountLabel.hidden = true;
-//        self.otherCountLabel.hidden = true;
-//        self.billTotalLabel.hidden = true;
-//    } else{
-        self.welcomeLabel.hidden = true;
-        self.mainCountLabel.hidden = false;
-        self.otherCountLabel.hidden = false;
-        self.billTotalLabel.hidden = false;
-        
-        self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
-        self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
-        self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
-   // }
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self action:@selector(didTap:)];
@@ -67,6 +74,21 @@
 }
 
 
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+
+    //[_order tearDownKVO];
+ /*
+    NSArray *keys= @[@"bill",@"main",@"other"];
+    
+    for (NSString *key in keys) {
+        [self removeObserver:self
+                  forKeyPath:key];
+    }
+*/
+    
+}
+
 #pragma mark - Actions
 
 -(void)observeValueForKeyPath:(NSString *)keyPath
@@ -74,10 +96,33 @@
                        change:(NSDictionary *)change
                       context:(void *)context{
     
-    self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
-    self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
-    self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
-    //NSLog(@"Value changed");
+   // NSLog(@"Detected change in Model. \n Keypath: %@\n object:%@\n change:%@", keyPath,object,change);
+    if (_order.billValue > 0){
+        self.welcomeLabel.hidden = true;
+        self.mainCountLabel.hidden = false;
+        self.otherCountLabel.hidden = false;
+        self.billTotalLabel.hidden = false;
+    }
+    
+    if ([keyPath isEqualToString:@"main"]){
+        self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
+            NSLog(@"Detected change in Main");
+                NSLog(@"New value for: %@",self.mainCountLabel.text );
+    }
+    if ([keyPath isEqualToString:@"other"]){
+        self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
+            NSLog(@"Detected change in Other");
+                NSLog(@"New value for: %@",self.otherCountLabel.text );
+    }
+    if ([keyPath isEqualToString:@"bill"]){
+        self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
+        NSLog(@"Detected change in Bill");
+
+    }
+    
+    [self.view setNeedsDisplay];
+
+    
 }
 
 -(void) didTap:(UITapGestureRecognizer *) tap{
@@ -87,14 +132,6 @@
 
     }
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

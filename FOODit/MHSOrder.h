@@ -5,6 +5,8 @@
 
 +(instancetype) orderWithcontext:(NSManagedObjectContext *)context;
 
--(void) SetupKVO;
+-(void) setupKVO;
+-(void) tearDownKVO;
+
 
 @end

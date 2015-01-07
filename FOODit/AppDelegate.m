@@ -60,6 +60,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     }else{
         if (logs){NSLog(@"We don't have any data, we load everything from the network");}
         [self loadRemoteData];
+        //[self loadLocalData];
         //Create the Order record
         _order = [MHSOrder orderWithcontext:self.model.context];
 
@@ -345,7 +346,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     //Create the only Order this application will support. But It is prepared to receive more orders in the future
     //if they are needed. That way the user can see his last orders.
     
-    _order = [MHSOrder orderWithcontext:self.model.context];
+    //_order = [MHSOrder orderWithcontext:self.model.context];
     //NSLog(@"MHSOrder: %@", myOnlyLonelyOrder);
        
     

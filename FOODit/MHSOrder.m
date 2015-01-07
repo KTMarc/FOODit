@@ -24,6 +24,7 @@
 }
 
 #pragma mark - KVO
+
 -(void) setupKVO{
     
     

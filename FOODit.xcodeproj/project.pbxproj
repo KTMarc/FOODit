@@ -40,7 +40,6 @@
 		497BDBCE1A5AFE62003E9586 /* MHSMealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497BDBCD1A5AFE62003E9586 /* MHSMealViewController.m */; };
 		49BDA8E41A3B03E800022C18 /* unnamed2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDA8E31A3B03E800022C18 /* unnamed2.jpg */; };
 		49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */; };
-		49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */; };
 		49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */; };
 		49BDA8FA1A3CA0C800022C18 /* MHSMealCardCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8F91A3CA0C800022C18 /* MHSMealCardCurve.m */; };
 		49BDA8FD1A3CA15200022C18 /* FOODitStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8FC1A3CA15200022C18 /* FOODitStyleKit.m */; };
@@ -156,8 +155,6 @@
 		49BDA8E31A3B03E800022C18 /* unnamed2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed2.jpg; sourceTree = "<group>"; };
 		49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderViewController.h; sourceTree = "<group>"; };
 		49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderViewController.m; sourceTree = "<group>"; };
-		49BDA8EB1A3B648900022C18 /* MHSMyUITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMyUITableView.h; sourceTree = "<group>"; };
-		49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMyUITableView.m; sourceTree = "<group>"; };
 		49BDA8EE1A3C667600022C18 /* MHSCoreDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSCoreDataViewController.h; sourceTree = "<group>"; };
 		49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSCoreDataViewController.m; sourceTree = "<group>"; };
 		49BDA8F81A3CA0C800022C18 /* MHSMealCardCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMealCardCurve.h; sourceTree = "<group>"; };
@@ -323,8 +320,6 @@
 				49C832CD1A33619100A73B0F /* Frameworks */,
 				49C832841A33590B00A73B0F /* Resources */,
 				4975EB4B1A2BA5DB00F54354 /* Main.storyboard */,
-				49BDA8EB1A3B648900022C18 /* MHSMyUITableView.h */,
-				49BDA8EC1A3B648900022C18 /* MHSMyUITableView.m */,
 				4975EB4E1A2BA5DB00F54354 /* Images.xcassets */,
 				49E9FD161A37AB8200F9BF50 /* Model.xcdatamodeld */,
 				4975EB3E1A2BA5DA00F54354 /* Supporting Files */,
@@ -688,7 +683,6 @@
 				49C832C11A335B5B00A73B0F /* MHSTag.m in Sources */,
 				49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */,
 				49C832C01A335B5B00A73B0F /* MHSOrder.m in Sources */,
-				49BDA8ED1A3B648A00022C18 /* MHSMyUITableView.m in Sources */,
 				4975EB411A2BA5DA00F54354 /* main.m in Sources */,
 				49C832B31A335B5200A73B0F /* _MHSMealOrder.m in Sources */,
 			);
