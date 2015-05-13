@@ -19,6 +19,8 @@ To make it load again:
 1-from the network from the simulator menu “iOS Simulator -> Reset content and settings..”
 2-from the device, delete the app
 
+·When adding a meal: the Alert View asks for a message to send to the kitchen. 
+
 
 Missing Features:
 
@@ -29,8 +31,6 @@ in List of Meals ViewController:
 ·Tag icons are not displayed graphically, but they are listed from the Database. 
 
 ·3 dots to expand the description.
-
-·Alert View displaying the number of meals the user wants to order and the "Notes for the kitchen". I forced all new added meals to the order were one unit and "No chilli" was the note. This was not on the screenshots, but I would add it.
 
 Links:
 https://github.com/FOODit/FOODit-MobileTest
