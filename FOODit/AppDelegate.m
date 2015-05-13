@@ -7,20 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "settings.h"
-#import "MHSMeal.h"
-#import "MHSMealOrder.h"
-#import "MHSTag.h"
-#import "MHSSimpleCoreDataStack.h"
-#import "MHSMealsTableViewController.h"
-#import "MHSPhoto.h"
-#import "MHSOrder.h"
-#import "AFNetworking.h"
-#import "NSDictionary+meal.h"
-#import "AFNetworkActivityIndicatorManager.h"
-#import "UIImageView+AFNetworking.h"
-
-
 
 //static NSString * const BaseURLString = @"http://localhost:8888/";
 static NSString * const BaseURLString = @"http://www.humet.es/";
@@ -54,7 +40,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
                 if (logs){NSLog(@"[results count]: %lu",(unsigned long)[results count]);}
                 if ([results count]>0){
                     _order = results[0];
-                   if (logs){ NSLog(@"LAst time Bill was: %@", _order.bill);}
+                   if (logs){ NSLog(@"Last time Bill was: %@", _order.bill);}
                 }
             }
     }else{

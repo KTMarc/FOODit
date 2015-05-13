@@ -138,8 +138,7 @@
     }
 }
 
-
-- (IBAction)resetButton:(id)sender {
+- (IBAction)resetButton:(id)sender { //not being used
 
     //Delete Database
     [_model zapAllData];

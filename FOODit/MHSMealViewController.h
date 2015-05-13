@@ -11,11 +11,13 @@
 #import "MHSCoreDataTableViewController.h"
 #import "MHSSimpleCoreDataStack.h"
 #import "MHSOrder.h"
+#import "MHSMeal.h"
 
-@interface MHSMealViewController : MHSCoreDataViewController
+@interface MHSMealViewController : MHSCoreDataViewController /*<UIAlertViewDelegate>*/
 
 @property (strong, nonatomic) MHSSimpleCoreDataStack *model;
 @property (strong, nonatomic) MHSOrder *order;
+@property (strong, nonatomic) MHSMeal *alertViewMeal;
 
 //IBOUTLETS
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

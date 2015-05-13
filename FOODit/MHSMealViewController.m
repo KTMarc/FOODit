@@ -59,7 +59,6 @@
     self.fetchedResultsController = results;
     
     
-    
 }
 
 
@@ -82,20 +81,36 @@
     
     // Get the meal
     MHSMeal *currentMeal = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    //Add the meal to MealsOrders
-    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:@"No Chilli!" meal:currentMeal order:_order mainCourse: currentMeal.mainCourse context:self.model.context];
-    
-    _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [currentMeal.price floatValue])];
 
-    if ([currentMeal.mainCourse isEqualToString:@"main"]){ //Update data consumed by MHSorderStatusBarViewController
+    _alertViewMeal = currentMeal;
+    
+    UIAlertView *alert;
+    alert = [[UIAlertView alloc] initWithTitle:@"Adding a meal" message:@"Enter note for the kitchen" delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Cancel",nil];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    [alert show];
+
+}
+
+#pragma - mark AlertView Delegate Method
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+ 
+    //NSLog(@"Text: %@", [[alertView textFieldAtIndex:0] text]);
+    //Add the meal to MealsOrders with the note
+    [MHSMealOrder mealOrderWithMealCount:@1 note_for_kitchen:[[alertView textFieldAtIndex:0] text] meal:_alertViewMeal order:_order mainCourse: _alertViewMeal.mainCourse context:self.model.context];
+    
+    _order.bill = [NSNumber numberWithFloat: ([_order.bill floatValue] + [_alertViewMeal.price floatValue])];
+    
+    if ([_alertViewMeal.mainCourse isEqualToString:@"main"]){ //Update data consumed by MHSorderStatusBarViewController
         _order.main = @(_order.main.longLongValue + 1);
     }else{
         _order.other = @(_order.main.longLongValue + 1);
     }
-
+    
 }
-
 
 #pragma mark - Delegate
 /*

@@ -38,6 +38,7 @@
 		4975EB5E1A2BA5DB00F54354 /* FOODitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975EB5D1A2BA5DB00F54354 /* FOODitTests.m */; };
 		497BDBCB1A59B0F8003E9586 /* MHSorderStatusBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497BDBCA1A59B0F8003E9586 /* MHSorderStatusBarViewController.m */; };
 		497BDBCE1A5AFE62003E9586 /* MHSMealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497BDBCD1A5AFE62003E9586 /* MHSMealViewController.m */; };
+		49B5944E1A66D9DD006E73B3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49B5944D1A66D9DD006E73B3 /* Localizable.strings */; };
 		49BDA8E41A3B03E800022C18 /* unnamed2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49BDA8E31A3B03E800022C18 /* unnamed2.jpg */; };
 		49BDA8EA1A3B266800022C18 /* MHSOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */; };
 		49BDA8F01A3C667600022C18 /* MHSCoreDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BDA8EF1A3C667600022C18 /* MHSCoreDataViewController.m */; };
@@ -152,6 +153,7 @@
 		497BDBCA1A59B0F8003E9586 /* MHSorderStatusBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSorderStatusBarViewController.m; sourceTree = "<group>"; };
 		497BDBCC1A5AFE62003E9586 /* MHSMealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSMealViewController.h; sourceTree = "<group>"; };
 		497BDBCD1A5AFE62003E9586 /* MHSMealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSMealViewController.m; sourceTree = "<group>"; };
+		49B5944D1A66D9DD006E73B3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		49BDA8E31A3B03E800022C18 /* unnamed2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = unnamed2.jpg; sourceTree = "<group>"; };
 		49BDA8E81A3B266800022C18 /* MHSOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSOrderViewController.h; sourceTree = "<group>"; };
 		49BDA8E91A3B266800022C18 /* MHSOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSOrderViewController.m; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				4975EB4B1A2BA5DB00F54354 /* Main.storyboard */,
 				4975EB4E1A2BA5DB00F54354 /* Images.xcassets */,
 				49E9FD161A37AB8200F9BF50 /* Model.xcdatamodeld */,
+				49B5944D1A66D9DD006E73B3 /* Localizable.strings */,
 				4975EB3E1A2BA5DA00F54354 /* Supporting Files */,
 			);
 			path = FOODit;
@@ -584,6 +587,7 @@
 				49C832A71A33596D00A73B0F /* tag--starter.svg in Resources */,
 				49C8329D1A33596D00A73B0F /* tag--chicken.svg in Resources */,
 				49C8329B1A33596D00A73B0F /* tag--charcoal.svg in Resources */,
+				49B5944E1A66D9DD006E73B3 /* Localizable.strings in Resources */,
 				49C832A21A33596D00A73B0F /* tag--peanut.svg in Resources */,
 				49C832A51A33596D00A73B0F /* tag--snack.svg in Resources */,
 				494F0ECC1A3A20D1007D8960 /* unnamed.jpg in Resources */,

@@ -26,7 +26,6 @@
 }
 
 
-
 //-(id) initWithFetchedResultsController: (NSFetchedResultsController *) aFetchedResultsController
 //                                 style: (UITableViewStyle) aStyle{
 //    
