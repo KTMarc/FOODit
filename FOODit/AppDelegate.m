@@ -104,7 +104,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
 -(void)autoSave{
     
     if (AUTO_SAVE) {
-        NSLog(@"Autosaving....");
+        //NSLog(@"Autosaving....");
         
         [self save];
         [self performSelector:@selector(autoSave)
@@ -117,6 +117,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
 
 -(void)loadRemoteData {
     //AFNetworking
+    //La ruedecilla de al lado del operador
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     NSString *string = [NSString stringWithFormat:@"%@menu.json", BaseURLString];
     
@@ -125,10 +126,12 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    //We choose the JSON Serializer, but we have also XML and others.
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        //At this point we have all thr response successfully received and we can parse it.
         [self parseResponseWith:operation withResponse:responseObject];
       
         
@@ -138,7 +141,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
                                                             message:[error localizedDescription]
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
+                                                    otherButtonTitles:nil];
         [alertView show];
         
     }];
@@ -166,6 +169,7 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
     
     
     for (NSDictionary *dictPointer in arrayDicts){
+        //We save in CoreData as we read from the dictionary of meals that AFNetworking did for us.
         actualMeal = [MHSMeal mealWithDictionary:dictPointer context:self.model.context];
         if (logs){NSLog(@"        Actual Meal:%@", [dictPointer valueForKey:@"name"]);}
         arrayTags = [dictPointer valueForKey:@"tags"];
@@ -272,9 +276,9 @@ static NSString * const BaseURLString = @"http://www.humet.es/";
 }
 
 
--(void)loadLocalData {
+-(void)loadLocalData { //Not used anymore
     
-    //Create a Meal or two
+    //Create a Meal or two the hard way
     MHSMeal *mealOne = [MHSMeal mealWithName:@"Seafood risotto"
                                         desc:@"This seafood risotto recipe is infused with a number of fresh herbs, imparting remarkable flavour onto the risotto rice base. With scallops, prawns and mussels to make up the risotto but you can use whatever seafood is available and you like. Served with some cheddar rolls or a small avocado salad for a delicious seafood supper."
                                        price:@9.5

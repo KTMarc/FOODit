@@ -168,9 +168,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         NSURLRequest *requestImage = [NSURLRequest requestWithURL:urlImage];
         UIImage *placeholderImage = [UIImage imageNamed:@"placeholder.jpg"];
         
+        
+        // we could make it in one single line here without blocks. But we have to remember the cancel other downloads not reusing cells, which would make the pictures overlapp one with another one.
+        
+        
         [mealImageView setImageWithURLRequest:requestImage placeholderImage:placeholderImage success:nil failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
             NSLog(@"Unable to retrieve image");
         }];
+        //we are using nil as success, but if we want to do some modifications to the image we could make it inside that block.
         
         
         /*
