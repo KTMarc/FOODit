@@ -23,7 +23,7 @@
 
 
 //IB OUTLETS
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) IBOutlet UILabel *totalPriceLabel;
 
 

@@ -20,6 +20,5 @@
 @property (strong, nonatomic) MHSMeal *alertViewMeal;
 
 //IBOUTLETS
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
