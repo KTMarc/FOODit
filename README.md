@@ -1,5 +1,18 @@
 # FOODit
-Some notes about the implementation:
+Initial requirements of the proof of concept:
+The solution should take into account the following:
+
+It should be as true to the designs as possible, but candidates should feel free to add anything that improves the flow/design, using touch and gestures where applicable.
+
+When the mobile is online, the application should cache the menu data in the mobile data store and periodically check for updates.
+
+The Application should continue to work while offline.
+
+The contents of the basket will be retained after the mobile or application has been restarted.
+
+A solution should show an understanding of the problems involved and make use of the tech stack to solve them.
+
+Some notes about my implementation:
 
 I've focused on working with persistance in the device with Core Data. 
 Core Data has a model prepared to have more than one Order (it was not a requirement but would be nice).
