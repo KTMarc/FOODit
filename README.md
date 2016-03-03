@@ -19,18 +19,12 @@ To make it load again:
 1-from the network from the simulator menu “iOS Simulator -> Reset content and settings..”
 2-from the device, delete the app
 
-·When adding a meal: the Alert View asks for a message to send to the kitchen. 
+·When adding a meal: the Alert View asks for a message to send to the kitchen. The message can be empty. 
 
 
-Missing Features:
-
-- When the mobile is online, the application should cache the [menu data](/data/menu.json) in the mobile data store and periodically check for updates ——> How to detect the update? there is no timestamp to check if there’s something new? Is the ID of each meal going to change when there is some update on the server side. Otherwise we should check and compare field by field if there is any difference from the last JSON.
-
-
-in List of Meals ViewController:
-·Tag icons are not displayed graphically, but they are listed from the Database. 
-
-·3 dots to expand the description.
+Usage:
+To reset Core Data Stack and start from Scratch you can use the small reset button in the top left corner.
+That will delete everything and then you should exit the app and open it again to have it fresh.
 
 Links:
 https://github.com/FOODit/FOODit-MobileTest
