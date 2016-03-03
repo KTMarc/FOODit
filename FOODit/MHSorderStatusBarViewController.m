@@ -17,22 +17,22 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.resetButton.hidden = true;
-
         if (_order.billValue == 0){
             self.welcomeLabel.hidden = false;
             self.mainCountLabel.hidden = true;
             self.otherCountLabel.hidden = true;
             self.billTotalLabel.hidden = true;
+            self.resetButton.hidden = true;
         } else{
+    self.resetButton.hidden = false;
     self.welcomeLabel.hidden = true;
     self.mainCountLabel.hidden = false;
     self.otherCountLabel.hidden = false;
     self.billTotalLabel.hidden = false;
 //    self.resetButton.hidden = false;
     
-    self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
-    self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
+    //self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
+    //self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];
     self.billTotalLabel.text= [NSString stringWithFormat: @"£%@",_order.bill];
      }
     
@@ -100,7 +100,7 @@
                       context:(void *)context{
     
    // NSLog(@"Detected change in Model. \n Keypath: %@\n object:%@\n change:%@", keyPath,object,change);
-    BOOL logs = NO;
+    BOOL logs = YES;
     if (_order.billValue > 0){
         self.welcomeLabel.hidden = true;
         self.mainCountLabel.hidden = false;
@@ -112,7 +112,9 @@
     if ([keyPath isEqualToString:@"main"]){
         self.mainCountLabel.text = [NSString stringWithFormat:@"%@ main", _order.main.stringValue];
         if (logs){ NSLog(@"Detected change in Main");
-            NSLog(@"New value for: %@",self.mainCountLabel.text );}
+            NSLog(@"New value for _order.main.stringValue: %@ ", _order.main.stringValue);
+            NSLog(@"New value for self.mainCountLabel.text: %@ ",self.mainCountLabel.text);
+        }
     }
     if ([keyPath isEqualToString:@"other"]){
         self.otherCountLabel.text = [NSString stringWithFormat:@"%@ other", _order.other.stringValue];

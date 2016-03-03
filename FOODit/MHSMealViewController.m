@@ -107,7 +107,7 @@
     if ([_alertViewMeal.mainCourse isEqualToString:@"main"]){ //Update data consumed by MHSorderStatusBarViewController
         _order.main = @(_order.main.longLongValue + 1);
     }else{
-        _order.other = @(_order.main.longLongValue + 1);
+        _order.other = @(_order.other.longLongValue + 1);
     }
     
 }
