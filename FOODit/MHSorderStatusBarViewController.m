@@ -100,7 +100,7 @@
                       context:(void *)context{
     
    // NSLog(@"Detected change in Model. \n Keypath: %@\n object:%@\n change:%@", keyPath,object,change);
-    BOOL logs = YES;
+    BOOL logs = NO;
     if (_order.billValue > 0){
         self.welcomeLabel.hidden = true;
         self.mainCountLabel.hidden = false;
