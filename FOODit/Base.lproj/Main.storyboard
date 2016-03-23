@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10109" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6ez-do-qkW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6ez-do-qkW">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -317,7 +317,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYt-Yl-AK4">
-                                <rect key="frame" x="-4" y="37" width="30" height="23"/>
+                                <rect key="frame" x="0.0" y="37" width="30" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <state key="normal" title="Reset">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,7 +330,7 @@
                         <color key="backgroundColor" red="0.7843137255" green="0.23529411759999999" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bJq-Kp-kD3" firstAttribute="leading" secondItem="BEO-nO-s2p" secondAttribute="leadingMargin" constant="10" id="2BH-8d-0Mh"/>
-                            <constraint firstItem="TYt-Yl-AK4" firstAttribute="leading" secondItem="BEO-nO-s2p" secondAttribute="leadingMargin" constant="-20" id="E9h-eP-nz8"/>
+                            <constraint firstItem="TYt-Yl-AK4" firstAttribute="leading" secondItem="BEO-nO-s2p" secondAttribute="leading" id="E9h-eP-nz8"/>
                             <constraint firstItem="Eh7-sw-lRf" firstAttribute="leading" secondItem="bJq-Kp-kD3" secondAttribute="trailing" constant="10" id="HaG-C6-Z6r"/>
                             <constraint firstItem="bJq-Kp-kD3" firstAttribute="centerY" secondItem="BEO-nO-s2p" secondAttribute="centerY" constant="5" id="HpJ-0z-vbt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aeh-e5-T7H" secondAttribute="trailing" constant="10" id="Lrh-Wt-crQ"/>
